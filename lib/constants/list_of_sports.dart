@@ -12,4 +12,26 @@ class SportList {
     LeagueSoccer.ligue1,
     LeagueSoccer.mls
   ];
+
+  static final List<League> basket = [
+    LeagueBasket.euroleague,
+    LeagueBasket.nba,
+    LeagueBasket.nccab,
+    LeagueBasket.wnba,
+  ];
+
+  static final List<League> tennis = [
+    LeagueTennis.atpAustralian,
+    LeagueTennis.atpFrenchopen,
+    LeagueTennis.atpUsOpen,
+    LeagueTennis.atpWimbledon,
+  ];
+
+  static final List<League> football = [
+    LeagueAmericanFootball.cfl,
+    LeagueAmericanFootball.ncaaf,
+    LeagueAmericanFootball.nfl,
+    LeagueAmericanFootball.nflSuperBowl,
+    LeagueAmericanFootball.ufl,
+  ];
 }

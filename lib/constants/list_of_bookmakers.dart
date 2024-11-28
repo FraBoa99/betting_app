@@ -28,3 +28,16 @@ class BookmakerListUs {
   static final espnbet =
       Bookmaker(key: 'espnbet', regionKey: 'us', title: 'Espnbet', image: '');
 }
+
+class BookmakersListAu {
+  static final betfair = Bookmaker(
+      key: 'betfair_ex_au', regionKey: 'au', title: 'Betfair AU', image: '');
+  static final sportsbet = Bookmaker(
+      key: 'sportsbet', regionKey: 'au', title: 'Sportsbet', image: '');
+  static final unibet =
+      Bookmaker(key: 'unibet', regionKey: 'au', title: 'Unibet', image: '');
+  static final topsport =
+      Bookmaker(key: 'topsport', regionKey: 'au', title: 'Topsport', image: '');
+  static final playup =
+      Bookmaker(key: 'playup', regionKey: 'au', title: 'Playup', image: '');
+}

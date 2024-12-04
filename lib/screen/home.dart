@@ -114,7 +114,9 @@ class Home extends StatelessWidget {
                                 List<Odds> oddsList = [];
                                 switch (state) {
                                   case BettingCubitInitial():
-                                    return const Text('initial');
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
                                   case BettingCubitLoading():
                                     return const Center(
                                       child: CircularProgressIndicator(),

@@ -1,5 +1,6 @@
 import 'package:betting_app/bloc/navigation/navigation_cubit.dart';
 import 'package:betting_app/bloc/rest/betting_cubit.dart';
+import 'package:betting_app/bloc/settings/bookmakers_cubit.dart';
 import 'package:betting_app/bloc/settings/theme_cubit.dart';
 import 'package:betting_app/bloc/ui/sport_cubit.dart';
 import 'package:betting_app/core/navigation/app_routes.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
     final repository = OddsRepository(apiClient: ApiService());
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => BookmakersCubit()),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => BettingCubit(repository: repository)),
         BlocProvider(
@@ -33,6 +35,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           initialRoute: AppRoutes.home,
           onGenerateRoute: AppRoutes.generateRoute,
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: theme,
           home: Home(),

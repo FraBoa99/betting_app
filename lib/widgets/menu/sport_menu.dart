@@ -1,5 +1,5 @@
 import 'package:betting_app/bloc/ui/sport_cubit.dart';
-import 'package:betting_app/widgets/square/sport_square.dart';
+import 'package:betting_app/widgets/menu/square/sport_square.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

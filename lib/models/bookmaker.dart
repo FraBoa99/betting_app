@@ -2,12 +2,12 @@ class Bookmaker {
   String key;
   String regionKey;
   String title;
-  String image;
+  String? image;
 
   Bookmaker({
     required this.key,
     required this.regionKey,
     required this.title,
-    required this.image,
+    this.image,
   });
 }

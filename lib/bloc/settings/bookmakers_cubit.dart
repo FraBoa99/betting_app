@@ -1,23 +1,18 @@
 import 'package:betting_app/constants/list_of_bookmakers.dart';
-import 'package:betting_app/core/storage/preferences_manager.dart';
+import 'package:betting_app/core/-storage/preferences_manager.dart';
 import 'package:betting_app/models/bookmaker.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum CountryOptions { eu, us, au }
 
-enum VisualOptions { alphabetical, custom }
-
 class BookmakersState extends Equatable {
   final CountryOptions country;
-  final VisualOptions visual;
-
   final List<Bookmaker> bookmakersList;
   final Map<CountryOptions, Bookmaker> selectedBookmaker;
 
   const BookmakersState(
       {required this.country,
-      required this.visual,
       required this.bookmakersList,
       required this.selectedBookmaker});
 
@@ -25,26 +20,22 @@ class BookmakersState extends Equatable {
     List<Bookmaker>? bookmakersList,
     Map<CountryOptions, Bookmaker>? selectedBookmaker,
     CountryOptions? country,
-    VisualOptions? visual,
   }) {
     return BookmakersState(
       bookmakersList: bookmakersList ?? this.bookmakersList,
       country: country ?? this.country,
-      visual: visual ?? this.visual,
       selectedBookmaker: selectedBookmaker ?? this.selectedBookmaker,
     );
   }
 
   @override
-  List<Object?> get props =>
-      [country, visual, bookmakersList, selectedBookmaker];
+  List<Object?> get props => [country, bookmakersList, selectedBookmaker];
 }
 
 class BookmakersCubit extends Cubit<BookmakersState> {
   BookmakersCubit()
       : super(BookmakersState(
           country: CountryOptions.eu,
-          visual: VisualOptions.alphabetical,
           bookmakersList: BookmakerListEurope.euBookmakersList,
           selectedBookmaker: const <CountryOptions, Bookmaker>{},
         ));
@@ -63,14 +54,6 @@ class BookmakersCubit extends Cubit<BookmakersState> {
           country: newCountry,
           bookmakersList: BookmakersListAu.auBookmakersList));
     }
-  }
-
-  void setVisual(VisualOptions newVisual) {
-    emit(state.copyWith(
-        visual: newVisual,
-        bookmakersList: BookmakerListEurope.euBookmakersList));
-    //Salva nelle preferenze
-    //
   }
 
   void setBookmakersList(List<Bookmaker> newBookmakersList) {

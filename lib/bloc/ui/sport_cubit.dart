@@ -2,12 +2,12 @@ import 'package:betting_app/bloc/rest/betting_cubit.dart';
 import 'package:betting_app/constants/list_of_league.dart';
 import 'package:betting_app/constants/list_of_sports.dart';
 import 'package:betting_app/models/league.dart';
+import 'package:betting_app/models/sport.dart';
 import 'package:betting_app/repository/odds_repository.dart';
-import 'package:betting_app/widgets/menu/sport_menu.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SportState {
-  final String selectedSport;
+  final Sport selectedSport;
   final League selectedLeague;
   final List<League> leagueList;
 
@@ -18,7 +18,7 @@ class SportState {
   });
 
   SportState copyWith({
-    String? selectedSport,
+    Sport? selectedSport,
     League? selectedLeague,
     List<League>? leagueList,
   }) {
@@ -34,25 +34,18 @@ class SportCubit extends Cubit<SportState> {
   final BettingCubit bettingCubit;
   SportCubit(this.bettingCubit, {required OddsRepository repository})
       : super(SportState(
-            selectedSport: 'Calcio',
+            selectedSport: Sport(
+                key: 'Calcio',
+                title: 'Calcio',
+                icon: 'icon',
+                leagues: SportList.soccerLeague),
             selectedLeague: LeagueSoccer
                 .serieA, //Da cambiare in futuro con logica di preferenza utente
-            leagueList: SportList.soccer));
+            leagueList: SportList.soccer.leagues));
 
-  void selectedSport(String sport) {
-    List<League> leagues = [];
-    if (sport == Sports.calcio.name) {
-      leagues = SportList.soccer;
-    } else if (sport == Sports.basket.name) {
-      leagues = SportList.basket;
-    } else if (sport == Sports.tennis.name) {
-      leagues = SportList.tennis;
-    } else if (sport == Sports.football.name) {
-      leagues = SportList.football;
-    }
-
+  void selectedSport(Sport sport) {
     emit(state.copyWith(
-        selectedSport: sport, leagueList: leagues, selectedLeague: null));
+        selectedSport: sport, leagueList: sport.leagues, selectedLeague: null));
   }
 
   void selectedLeague(League league) {

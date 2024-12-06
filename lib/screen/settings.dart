@@ -1,4 +1,4 @@
-import 'package:betting_app/core/navigation/app_routes.dart';
+import 'package:betting_app/core/-navigation/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
@@ -54,6 +54,8 @@ class Settings extends StatelessWidget {
                   case 0:
                     Navigator.pushNamed(context, AppRoutes.settingsTheme);
                     break;
+                  case 1:
+                    Navigator.pushNamed(context, AppRoutes.settingSport);
                   case 2:
                     Navigator.pushNamed(context, AppRoutes.settingsBookmaker);
                   default:

@@ -17,7 +17,7 @@ class LeagueSquare extends StatelessWidget {
       width: 90,
       height: 80,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15), color: Colors.white),
+          borderRadius: BorderRadius.circular(10), color: Colors.white),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

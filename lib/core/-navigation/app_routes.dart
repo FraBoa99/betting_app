@@ -1,6 +1,7 @@
 import 'package:betting_app/screen/home.dart';
+import 'package:betting_app/screen/settings.dart';
 import 'package:betting_app/screen/settings/bookmakers_settings.dart';
-import 'package:betting_app/screen/settings/settings.dart';
+import 'package:betting_app/screen/settings/sports_settings.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -27,7 +28,9 @@ class AppRoutes {
       // case settingsTheme:
       //   return MaterialPageRoute(builder: (_) => SettingsTheme());
       case settingsBookmaker:
-        return MaterialPageRoute(builder: (_) => BookmakersSettings());
+        return MaterialPageRoute(builder: (_) => const BookmakersSettings());
+      case settingSport:
+        return MaterialPageRoute(builder: (_) => const SportsSettings());
       default:
         return MaterialPageRoute(builder: (_) => Home());
     }

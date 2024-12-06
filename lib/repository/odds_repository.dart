@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:betting_app/core/-api/api_service.dart';
 import 'package:betting_app/models/apiModels/odds.dart';
-import 'package:betting_app/services/api_service.dart';
 
 class OddsRepository {
   final ApiService apiClient;

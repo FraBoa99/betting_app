@@ -26,7 +26,7 @@ class Odds {
       id: map['id'] ?? '',
       sportKey: map['sport_key'] ?? '',
       sportTitle: map['sport_title'] ?? '',
-      commenceTime: map['commenceTime'] ?? '',
+      commenceTime: map['commence_time'] ?? '',
       homeTeam: map['home_team'] ?? '',
       bookmakers: (map['bookmakers'] as List<dynamic>)
           .map((item) => BookmakersApi.fromMap(item as Map<String, dynamic>))

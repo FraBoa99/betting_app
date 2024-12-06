@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'bet_odd_title.dart';
 
 class BetEventOddsListTitle extends StatelessWidget {
@@ -6,7 +8,7 @@ class BetEventOddsListTitle extends StatelessWidget {
   final String team2;
   final Icon? icon;
   final String tournament;
-  final String date;
+  final DateTime? date;
   final double? odd1;
   final double? oddX;
   final double? odd2;
@@ -16,7 +18,7 @@ class BetEventOddsListTitle extends StatelessWidget {
     required this.team1,
     required this.team2,
     required this.tournament,
-    required this.date,
+    this.date,
     this.icon,
     this.odd1,
     this.oddX,
@@ -33,21 +35,35 @@ class BetEventOddsListTitle extends StatelessWidget {
         title:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(tournament),
-              Text(team1, style: Theme.of(context).textTheme.headlineSmall),
-              Text(team2, style: Theme.of(context).textTheme.headlineSmall),
-              Text(date)
+              Text(team1,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.w600)),
+              Text(team2,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.w600)),
+              Text(
+                DateFormat('HH:mm, d MMMM').format(date ?? DateTime.now()),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontSize: 14, fontWeight: FontWeight.w400),
+              ),
             ],
           ),
           Row(
             children: [
               BetOddTitle(label: '1', odd: odd1 ?? 1.00),
-              const SizedBox(width: 4),
+              const SizedBox(width: 10),
               if (oddX != null) BetOddTitle(label: 'X', odd: oddX ?? 1.0),
-              const SizedBox(width: 4),
+              const SizedBox(width: 10),
               BetOddTitle(label: '2', odd: odd2 ?? 1.00)
             ],
           ),

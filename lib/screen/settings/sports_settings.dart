@@ -55,7 +55,7 @@ class _SportsSettings extends State<SportsSettings> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             mainAxisSpacing: 10,
-                            mainAxisExtent: 130),
+                            mainAxisExtent: 140),
                     itemCount: state.leagueList.length,
                     itemBuilder: (context, index) {
                       return LeagueSquare(

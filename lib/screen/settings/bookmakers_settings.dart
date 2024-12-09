@@ -38,23 +38,15 @@ class _BookmakersSettingsState extends State<BookmakersSettings> {
         builder: (context, state) {
           return Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(
-                  top: 200,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                        child: NationSquare(nameNation: CountryOptions.eu)),
-                    Expanded(
-                        child: NationSquare(nameNation: CountryOptions.us)),
-                    Expanded(
-                        child: NationSquare(nameNation: CountryOptions.au)),
-                  ],
-                ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(child: NationSquare(nameNation: CountryOptions.eu)),
+                  Expanded(child: NationSquare(nameNation: CountryOptions.us)),
+                  Expanded(child: NationSquare(nameNation: CountryOptions.au)),
+                ],
               ),
               Expanded(
                 child: Padding(

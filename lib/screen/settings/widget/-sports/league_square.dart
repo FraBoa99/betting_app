@@ -1,6 +1,6 @@
-import 'package:betting_app/bloc/settings/sports_settings_cubit.dart';
 import 'package:betting_app/models/league.dart';
 import 'package:betting_app/models/sport.dart';
+import 'package:betting_app/screen/settings/cubit/sports_settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

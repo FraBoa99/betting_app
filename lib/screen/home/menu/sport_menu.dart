@@ -1,7 +1,7 @@
-import 'package:betting_app/bloc/ui/sport_cubit.dart';
 import 'package:betting_app/constants/list_of_sports.dart';
 import 'package:betting_app/models/sport.dart';
-import 'package:betting_app/widgets/home%20menu/square/sport_square.dart';
+import 'package:betting_app/screen/home/cubit/sport_cubit.dart';
+import 'package:betting_app/screen/home/widgets/sport_square.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

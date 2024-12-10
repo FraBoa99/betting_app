@@ -1,7 +1,7 @@
-import 'package:betting_app/screen/home.dart';
-import 'package:betting_app/screen/settings.dart';
-import 'package:betting_app/screen/settings/bookmakers_settings.dart';
-import 'package:betting_app/screen/settings/sports_settings.dart';
+import 'package:betting_app/screen/home/screen/home.dart';
+import 'package:betting_app/screen/settings/screen/bookmakers_settings.dart';
+import 'package:betting_app/screen/settings/screen/settings.dart';
+import 'package:betting_app/screen/settings/screen/sports_settings.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {

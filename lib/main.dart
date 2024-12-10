@@ -1,17 +1,22 @@
-import 'package:betting_app/bloc/navigation/navigation_cubit.dart';
-import 'package:betting_app/bloc/rest/betting_cubit.dart';
-import 'package:betting_app/bloc/settings/bookmakers_cubit.dart';
-import 'package:betting_app/bloc/settings/sports_settings_cubit.dart';
-import 'package:betting_app/bloc/settings/theme_cubit.dart';
-import 'package:betting_app/bloc/ui/sport_cubit.dart';
+import 'package:betting_app/bloc/betting_cubit.dart';
 import 'package:betting_app/core/-api/api_service.dart';
-import 'package:betting_app/core/-navigation/app_routes.dart';
 import 'package:betting_app/core/-theme/theme_manager.dart';
+import 'package:betting_app/firebase_options.dart';
+import 'package:betting_app/navigation/app_routes.dart';
+import 'package:betting_app/navigation/cubit/navigation_cubit.dart';
 import 'package:betting_app/repository/odds_repository.dart';
+import 'package:betting_app/screen/home/cubit/sport_cubit.dart';
+import 'package:betting_app/screen/settings/cubit/bookmakers_cubit.dart';
+import 'package:betting_app/screen/settings/cubit/sports_settings_cubit.dart';
+import 'package:betting_app/screen/settings/cubit/theme_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

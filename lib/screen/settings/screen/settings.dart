@@ -1,4 +1,4 @@
-import 'package:betting_app/core/-navigation/app_routes.dart';
+import 'package:betting_app/navigation/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {

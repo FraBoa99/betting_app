@@ -1,19 +1,18 @@
-import 'package:betting_app/bloc/settings/sports_settings_cubit.dart';
-import 'package:betting_app/constants/list_of_sports.dart';
-import 'package:betting_app/core/-navigation/app_routes.dart';
-import 'package:betting_app/widgets/settings/-sports/league_square.dart';
-import 'package:betting_app/widgets/settings/-sports/sport_square.dart';
+import 'package:betting_app/navigation/app_routes.dart';
+import 'package:betting_app/screen/settings/cubit/bookmakers_cubit.dart';
+import 'package:betting_app/screen/settings/widget/-bookmakers/bookmaker_square.dart';
+import 'package:betting_app/screen/settings/widget/-bookmakers/nation_square.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SportsSettings extends StatefulWidget {
-  const SportsSettings({super.key});
+class BookmakersSettings extends StatefulWidget {
+  const BookmakersSettings({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SportsSettings();
+  State<StatefulWidget> createState() => _BookmakersSettingsState();
 }
 
-class _SportsSettings extends State<SportsSettings> {
+class _BookmakersSettingsState extends State<BookmakersSettings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class _SportsSettings extends State<SportsSettings> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
-          'Sports',
+          'Bookmakers',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
         ),
         centerTitle: false,
@@ -35,16 +34,18 @@ class _SportsSettings extends State<SportsSettings> {
           )
         ],
       ),
-      body: BlocBuilder<SportsSettingsCubit, SportsSettingsState>(
+      body: BlocBuilder<BookmakersCubit, BookmakersState>(
         builder: (context, state) {
           return Column(
             children: [
-              Row(
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(child: SportSquare(sport: SportList.soccer)),
-                  Expanded(child: SportSquare(sport: SportList.basket)),
-                  Expanded(child: SportSquare(sport: SportList.tennis)),
-                  Expanded(child: SportSquare(sport: SportList.football))
+                  Expanded(child: NationSquare(nameNation: CountryOptions.eu)),
+                  Expanded(child: NationSquare(nameNation: CountryOptions.us)),
+                  Expanded(child: NationSquare(nameNation: CountryOptions.au)),
                 ],
               ),
               Expanded(
@@ -55,12 +56,12 @@ class _SportsSettings extends State<SportsSettings> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             mainAxisSpacing: 10,
-                            mainAxisExtent: 140),
-                    itemCount: state.leagueList.length,
+                            mainAxisExtent: 130),
+                    itemCount: state.bookmakersList.length,
                     itemBuilder: (context, index) {
-                      return LeagueSquare(
-                        league: state.leagueList[index],
-                        sport: state.sport,
+                      return BookmakerSquare(
+                        bookmaker: state.bookmakersList[index],
+                        bookmakerCountry: state.country,
                       );
                     },
                   ),

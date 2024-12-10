@@ -1,6 +1,6 @@
-import 'package:betting_app/bloc/settings/bookmakers_cubit.dart';
 import 'package:betting_app/constants/assets/assets.dart';
 import 'package:betting_app/models/bookmaker.dart';
+import 'package:betting_app/screen/settings/cubit/bookmakers_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';

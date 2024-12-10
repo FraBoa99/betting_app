@@ -1,20 +1,19 @@
-import 'package:betting_app/bloc/settings/sports_settings_cubit.dart';
-import 'package:betting_app/models/sport.dart';
+import 'package:betting_app/screen/settings/cubit/bookmakers_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SportSquare extends StatelessWidget {
-  final Sport sport;
-  const SportSquare({super.key, required this.sport});
+class NationSquare extends StatelessWidget {
+  final CountryOptions nameNation;
+  const NationSquare({required this.nameNation, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SportsSettingsCubit, SportsSettingsState>(
+    return BlocBuilder<BookmakersCubit, BookmakersState>(
         builder: (context, state) {
       return GestureDetector(
         child: Container(
           height: 45,
-          color: sport == state.sport
+          color: nameNation == state.country
               ? const Color.fromARGB(255, 212, 244, 54)
               : Colors.white,
           child: Column(
@@ -29,14 +28,14 @@ class SportSquare extends StatelessWidget {
                     spreadRadius: 1.5,
                   ),
                 ]),
-                child: Text(sport.title.toUpperCase(),
+                child: Text(nameNation.name.toUpperCase(),
                     style: Theme.of(context).textTheme.bodyMedium),
               ),
             ],
           ),
         ),
         onTap: () {
-          context.read<SportsSettingsCubit>().setSport(sport);
+          context.read<BookmakersCubit>().setCountry(nameNation);
         },
       );
     });

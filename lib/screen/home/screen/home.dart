@@ -1,11 +1,11 @@
-import 'package:betting_app/bloc/navigation/navigation_cubit.dart';
-import 'package:betting_app/bloc/rest/betting_cubit.dart';
-import 'package:betting_app/core/-navigation/app_routes.dart';
+import 'package:betting_app/bloc/betting_cubit.dart';
 import 'package:betting_app/models/apiModels/odds.dart';
+import 'package:betting_app/navigation/app_routes.dart';
+import 'package:betting_app/navigation/cubit/navigation_cubit.dart';
+import 'package:betting_app/screen/home/menu/league_menu.dart';
+import 'package:betting_app/screen/home/menu/sport_menu.dart';
+import 'package:betting_app/screen/home/widgets/bet_event_odds_list_title.dart';
 import 'package:betting_app/utils/string_helper.dart';
-import 'package:betting_app/widgets/betting/bet_event_odds_list_title.dart';
-import 'package:betting_app/widgets/home%20menu/league_menu.dart';
-import 'package:betting_app/widgets/home%20menu/sport_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

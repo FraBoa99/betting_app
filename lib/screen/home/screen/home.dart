@@ -1,4 +1,4 @@
-import 'package:betting_app/bloc/betting_cubit.dart';
+import 'package:betting_app/cubits/betting/betting_cubit.dart';
 import 'package:betting_app/models/apiModels/odds.dart';
 import 'package:betting_app/navigation/app_routes.dart';
 import 'package:betting_app/navigation/cubit/navigation_cubit.dart';

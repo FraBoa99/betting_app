@@ -1,6 +1,6 @@
-import 'package:betting_app/bloc/betting_cubit.dart';
 import 'package:betting_app/constants/list_of_league.dart';
 import 'package:betting_app/constants/list_of_sports.dart';
+import 'package:betting_app/cubits/betting/betting_cubit.dart';
 import 'package:betting_app/models/league.dart';
 import 'package:betting_app/models/sport.dart';
 import 'package:betting_app/repository/odds_repository.dart';

@@ -57,7 +57,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBInKREAuataP8Og5Gq2bdfagoykYh1oOg',
-    appId: '1:261259473995:android:be4504fc7f2c58db36c9ce',
+    appId: '1:261259473995:android:8804510657e1697d36c9ce',
     messagingSenderId: '261259473995',
     projectId: 'betting-app-bd063',
     storageBucket: 'betting-app-bd063.firebasestorage.app',
@@ -71,4 +71,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'betting-app-bd063.firebasestorage.app',
     iosBundleId: 'com.example.bettingApp',
   );
+
 }

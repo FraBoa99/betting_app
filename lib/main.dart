@@ -1,9 +1,11 @@
-import 'package:betting_app/bloc/betting_cubit.dart';
 import 'package:betting_app/core/-api/api_service.dart';
 import 'package:betting_app/core/-theme/theme_manager.dart';
+import 'package:betting_app/cubits/auth/auth_cubit.dart';
+import 'package:betting_app/cubits/betting/betting_cubit.dart';
 import 'package:betting_app/firebase_options.dart';
 import 'package:betting_app/navigation/app_routes.dart';
 import 'package:betting_app/navigation/cubit/navigation_cubit.dart';
+import 'package:betting_app/repository/auth_repository.dart';
 import 'package:betting_app/repository/odds_repository.dart';
 import 'package:betting_app/screen/home/cubit/sport_cubit.dart';
 import 'package:betting_app/screen/settings/cubit/bookmakers_cubit.dart';
@@ -17,6 +19,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   runApp(const MyApp());
 }
 
@@ -25,17 +28,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repository = OddsRepository(apiClient: ApiService());
+    final oddsRepository = OddsRepository(apiClient: ApiService());
+    final authRepository = AuthRepository();
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => AuthCubit(authRepository)),
         BlocProvider(create: (context) => NavigationCubit()),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => BookmakersCubit()),
         BlocProvider(create: (context) => SportsSettingsCubit()),
-        BlocProvider(create: (context) => BettingCubit(repository: repository)),
         BlocProvider(
-          create: (context) =>
-              SportCubit(context.read<BettingCubit>(), repository: repository),
+            create: (context) => BettingCubit(repository: oddsRepository)),
+        BlocProvider(
+          create: (context) => SportCubit(context.read<BettingCubit>(),
+              repository: oddsRepository),
         ),
       ],
       child: BlocBuilder<ThemeCubit, AppTheme>(builder: (context, themeState) {

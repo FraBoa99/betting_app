@@ -60,10 +60,14 @@ class AuthRepository {
     try {
       final LoginResult result = await _facebookAuth.login();
       if (result.status == LoginStatus.success) {
-        final AccessToken accessToken = result.accessToken!;
-        final AuthCredential credential =
-            FacebookAuthProvider.credential(accessToken.tokenString);
-        return await _firebaseAuth.signInWithCredential(credential);
+        final AccessToken? fbtoken = result.accessToken;
+        if (fbtoken != null) {
+          final OAuthCredential credential =
+              FacebookAuthProvider.credential(fbtoken.tokenString);
+
+          UserCredential userCredential =
+              await FirebaseAuth.instance.signInWithCredential(credential);
+        }
       } else {
         throw Exception("Login failed with status: ${result.status}");
       }

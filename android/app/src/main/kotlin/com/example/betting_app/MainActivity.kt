@@ -1,4 +1,4 @@
-package com.example.betting_app
+package betting.app.com;
 
 import io.flutter.embedding.android.FlutterActivity
 

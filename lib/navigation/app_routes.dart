@@ -1,15 +1,17 @@
-import 'package:betting_app/screen/home/screen/home.dart';
-import 'package:betting_app/screen/login/screen/forgot_password.dart';
-import 'package:betting_app/screen/login/screen/login.dart';
-import 'package:betting_app/screen/login/screen/signup.dart';
-import 'package:betting_app/screen/settings/screen/bookmakers_settings.dart';
-import 'package:betting_app/screen/settings/screen/settings.dart';
-import 'package:betting_app/screen/settings/screen/sports_settings.dart';
+import 'package:betting_app/modules/auth/screen/auth_start_screen.dart';
+import 'package:betting_app/modules/auth/screen/password_reset_screen.dart';
+import 'package:betting_app/modules/auth/screen/phone_auth_screen.dart';
+import 'package:betting_app/modules/auth/screen/registration_flow.dart';
+import 'package:betting_app/modules/home/screen/home.dart';
+import 'package:betting_app/modules/settings/screen/bookmakers_settings.dart';
+import 'package:betting_app/modules/settings/screen/settings.dart';
+import 'package:betting_app/modules/settings/screen/sports_settings.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
   //Login routes
   static const String login = '/login';
+  static const String phoneLogin = '/phoneLogin';
   static const String signup = '/signup';
   static const String forgotPassword = '/forgotPassword';
 
@@ -31,13 +33,18 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case login:
-        return MaterialPageRoute(builder: (_) => const Login());
+        return MaterialPageRoute(builder: (_) => const AuthStartScreen());
+      case phoneLogin:
+        return MaterialPageRoute(builder: (_) => const PhoneLogin());
       case signup:
-        return MaterialPageRoute(builder: (_) => const Signup());
+        return MaterialPageRoute(builder: (_) => RegistrationFlow());
       case forgotPassword:
         return MaterialPageRoute(builder: (_) => const ForgotPassword());
       case home:
-        return MaterialPageRoute(builder: (_) => Home());
+        return MaterialPageRoute(
+            builder: (_) => Home(
+                  localUser: null,
+                ));
       case settings:
         return MaterialPageRoute(builder: (_) => Settings());
       // case settingsTheme:
@@ -47,7 +54,7 @@ class AppRoutes {
       case settingSport:
         return MaterialPageRoute(builder: (_) => const SportsSettings());
       default:
-        return MaterialPageRoute(builder: (_) => const Login());
+        return MaterialPageRoute(builder: (_) => const AuthStartScreen());
     }
   }
 }

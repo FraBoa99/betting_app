@@ -1,1 +1,47 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"betting-app-bd063","appId":"1:261259473995:android:8804510657e1697d36c9ce","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"betting-app-bd063","appId":"1:261259473995:ios:e141024871260ef536c9ce","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"betting-app-bd063","configurations":{"android":"1:261259473995:android:8804510657e1697d36c9ce","ios":"1:261259473995:ios:e141024871260ef536c9ce","web":"1:261259473995:web:bfd2755eefd0d4ae36c9ce"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "betting-app-bd063",
+          "appId": "1:261259473995:android:8804510657e1697d36c9ce",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "betting-app-bd063",
+          "appId": "1:261259473995:ios:e141024871260ef536c9ce",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "betting-app-bd063",
+          "configurations": {
+            "android": "1:261259473995:android:8804510657e1697d36c9ce",
+            "ios": "1:261259473995:ios:e141024871260ef536c9ce",
+            "web": "1:261259473995:web:bfd2755eefd0d4ae36c9ce"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
+    }
+  ]
+}

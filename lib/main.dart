@@ -1,16 +1,18 @@
-import 'package:betting_app/core/-api/api_service.dart';
-import 'package:betting_app/core/-theme/theme_manager.dart';
-import 'package:betting_app/cubits/auth/auth_cubit.dart';
-import 'package:betting_app/cubits/betting/betting_cubit.dart';
+import 'package:betting_app/core/api/api_service.dart';
+import 'package:betting_app/core/theme/theme_manager.dart';
 import 'package:betting_app/firebase_options.dart';
+import 'package:betting_app/modules/auth/cubit/auth_cubit.dart';
+import 'package:betting_app/modules/auth/repository/auth_repository.dart';
+import 'package:betting_app/modules/bets/cubit/betting_cubit.dart';
+import 'package:betting_app/modules/bets/repository/odds_repository.dart';
+import 'package:betting_app/modules/home/cubit/sport_cubit.dart';
+import 'package:betting_app/modules/settings/cubit/bookmakers_cubit.dart';
+import 'package:betting_app/modules/settings/cubit/sports_settings_cubit.dart';
+import 'package:betting_app/modules/settings/cubit/theme_cubit.dart';
+import 'package:betting_app/modules/user/cubit/user_cubit.dart';
+import 'package:betting_app/modules/user/repository/user_repository.dart';
 import 'package:betting_app/navigation/app_routes.dart';
-import 'package:betting_app/navigation/cubit/navigation_cubit.dart';
-import 'package:betting_app/repository/auth_repository.dart';
-import 'package:betting_app/repository/odds_repository.dart';
-import 'package:betting_app/screen/home/cubit/sport_cubit.dart';
-import 'package:betting_app/screen/settings/cubit/bookmakers_cubit.dart';
-import 'package:betting_app/screen/settings/cubit/sports_settings_cubit.dart';
-import 'package:betting_app/screen/settings/cubit/theme_cubit.dart';
+import 'package:betting_app/navigation/navigation_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +34,13 @@ class MyApp extends StatelessWidget {
     final authRepository = AuthRepository();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthCubit(authRepository)),
+        BlocProvider(
+          create: (context) =>
+              AuthCubit(authRepository, UserRepository.istance),
+        ),
+        BlocProvider(
+          create: (context) => UserCubit(UserRepository.istance),
+        ),
         BlocProvider(create: (context) => NavigationCubit()),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => BookmakersCubit()),

@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "261259473995-qaggbmf5tthautqg8mip0s5an9kinlq9.apps.googleusercontent.com",
+          "client_id": "261259473995-fpq9cdpd89dra062lushkuv1f6a2k47e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "betting.app.com",
-            "certificate_hash": "1a5e4cce9577eb442960bf6a9e1a82812d08ed25"
+            "certificate_hash": "b9a3a283dfcb523827c35e29e551b2ccf107591c"
           }
         },
         {

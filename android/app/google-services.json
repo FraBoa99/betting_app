@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "261259473995",
+    "project_id": "betting-app-bd063",
+    "storage_bucket": "betting-app-bd063.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261259473995:android:be4504fc7f2c58db36c9ce",
+        "android_client_info": {
+          "package_name": "betting.app.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261259473995-fpq9cdpd89dra062lushkuv1f6a2k47e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "betting.app.com",
+            "certificate_hash": "b9a3a283dfcb523827c35e29e551b2ccf107591c"
+          }
+        },
+        {
+          "client_id": "261259473995-b2q1ncoqju2rol1fbl0fm0r3047vd3qt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBInKREAuataP8Og5Gq2bdfagoykYh1oOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261259473995-b2q1ncoqju2rol1fbl0fm0r3047vd3qt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "261259473995-mc3qce5h7bsb02h8eeh6gapeabu1tgqe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bettingApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

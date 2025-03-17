@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^9.21.0",
+    "eslint-plugin-react": "^7.37.4"
+  }
+}

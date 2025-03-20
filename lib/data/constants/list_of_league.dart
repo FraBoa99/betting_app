@@ -1,4 +1,4 @@
-import 'package:betting_app/assets/assets.dart';
+import 'package:betting_app/constants/assets/assets.dart';
 import 'package:betting_app/data/constants/list_of_bookmakers.dart';
 import 'package:betting_app/data/models/league.dart';
 

@@ -46,6 +46,10 @@ class Assets {
   /// assets/images/flags/usa_flag.svg
   static const String imagesFlagsUsaFlag = "assets/images/flags/usa_flag.svg";
 
+  /// Assets for imagesIconsLogoAppleLogo
+  /// assets/images/icons/logo/apple_logo.svg
+  static const String imagesIconsLogoAppleLogo = "assets/images/icons/logo/apple_logo.svg";
+
   /// Assets for imagesIconsLogoBetfairLogo
   /// assets/images/icons/logo/betfair_logo.svg
   static const String imagesIconsLogoBetfairLogo = "assets/images/icons/logo/betfair_logo.svg";
@@ -53,6 +57,10 @@ class Assets {
   /// Assets for imagesIconsLogoEspnLogo
   /// assets/images/icons/logo/espn_logo.svg
   static const String imagesIconsLogoEspnLogo = "assets/images/icons/logo/espn_logo.svg";
+
+  /// Assets for imagesIconsLogoFacebookLogo
+  /// assets/images/icons/logo/facebook_logo.svg
+  static const String imagesIconsLogoFacebookLogo = "assets/images/icons/logo/facebook_logo.svg";
 
   /// Assets for imagesIconsLogoFanduelLogo
   /// assets/images/icons/logo/fanduel_logo.svg

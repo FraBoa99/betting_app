@@ -1,4 +1,4 @@
-import 'package:betting_app/assets/assets.dart';
+import 'package:betting_app/constants/assets/assets.dart';
 import 'package:betting_app/data/models/bookmaker.dart';
 import 'package:betting_app/logic/cubit/settings/bookmakers_cubit.dart';
 import 'package:flutter/material.dart';

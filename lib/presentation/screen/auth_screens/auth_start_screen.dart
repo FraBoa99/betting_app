@@ -1,4 +1,4 @@
-import 'package:betting_app/assets/assets.dart';
+import 'package:betting_app/constants/assets/assets.dart';
 import 'package:betting_app/core/app_routes.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_cubit.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_state.dart';

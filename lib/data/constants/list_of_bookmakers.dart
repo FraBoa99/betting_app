@@ -1,4 +1,4 @@
-import 'package:betting_app/assets/assets.dart';
+import 'package:betting_app/constants/assets/assets.dart';
 import 'package:betting_app/data/models/bookmaker.dart';
 
 class BookmakerListEurope {

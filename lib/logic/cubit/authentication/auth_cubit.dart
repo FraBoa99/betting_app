@@ -43,11 +43,11 @@ class AuthCubit extends Cubit<AuthState> {
           await _authRepository.createUserWithEmail(user.email, password);
 
       if (userCredential != null && userCredential.user != null) {
-        emit(AuthSuccess(userCredential.user!, 'email'));
-
         LocalUser newUser = user.copyWith(uid: userCredential.user!.uid);
 
         await _authRepository.saveUserToFirestore(newUser);
+
+        emit(AuthSuccess(userCredential.user!, 'email'));
       } else {
         emit(AuthError(
             'Errore nella fase di regstrazione. Controllare la rete internet e riprovare.'));

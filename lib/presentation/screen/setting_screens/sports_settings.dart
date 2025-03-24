@@ -1,4 +1,3 @@
-import 'package:betting_app/core/app_routes.dart';
 import 'package:betting_app/data/constants/list_of_sports.dart';
 import 'package:betting_app/logic/cubit/settings/sports_settings_cubit.dart';
 import 'package:betting_app/presentation/widget/widgets/bookmaker_league_square.dart';
@@ -28,10 +27,7 @@ class _SportsSettings extends State<SportsSettings> {
         actions: [
           IconButton(
             icon: const Icon(Icons.close),
-            onPressed: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
-            },
+            onPressed: () {},
           )
         ],
       ),

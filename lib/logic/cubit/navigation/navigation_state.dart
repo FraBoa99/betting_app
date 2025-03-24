@@ -9,7 +9,11 @@ abstract class NavigationState extends Equatable {
 
 class NavigationInitial extends NavigationState {}
 
-class NavigationHome extends NavigationState {}
+class NavigationWrappedHome extends NavigationState {}
+
+class NavigationGuestHome extends NavigationState {}
+
+class NavigationUserHome extends NavigationState {}
 
 class NavigationLogin extends NavigationState {}
 

@@ -14,7 +14,7 @@ class _CustomAppBar extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color.fromRGBO(254, 76, 68, 1),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
     );
   }
 }

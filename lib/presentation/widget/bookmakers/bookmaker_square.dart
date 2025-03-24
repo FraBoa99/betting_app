@@ -56,7 +56,7 @@ class _BookmakerSquareState extends State<BookmakerSquare> {
                     SvgPicture.asset(
                       width: 60,
                       height: 60,
-                      widget.bookmaker.image ?? Assets.imagesAppFileError,
+                      widget.bookmaker.image ?? Assets.appFileError,
                     ),
                   ],
                 ),

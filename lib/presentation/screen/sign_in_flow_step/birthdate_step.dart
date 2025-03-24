@@ -107,11 +107,12 @@ class _BirthdateStepState extends State<BirthdateStep> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Inserisci la tua data di nascita",
+          const Text("Data di nascita",
               style: TextStyle(
-                  fontSize: 28,
+                  color: Colors.white,
+                  fontSize: 29,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'Roboto')),
+                  fontFamily: 'Playfair Display')),
           const SizedBox(
             height: 50,
           ),
@@ -120,11 +121,17 @@ class _BirthdateStepState extends State<BirthdateStep> {
             keyboardType: TextInputType.number,
             maxLength: 10,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w600,
+                color: widget.dateController.text.length == 10
+                    ? Theme.of(context).primaryColor
+                    : Colors.white),
             decoration: InputDecoration(
               hintText: "DD/MM/YYYY",
               border: InputBorder.none,
               errorText: _errorMessage,
+              errorStyle: const TextStyle(fontSize: 20),
               counterText: "", // Nasconde il contatore di caratteri
             ),
             inputFormatters: [
@@ -141,12 +148,12 @@ class _BirthdateStepState extends State<BirthdateStep> {
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: widget.dateController.text.length == 10
-                        ? Colors.blue
-                        : Colors.grey.shade300,
+                        ? const Color.fromARGB(255, 181, 217, 53)
+                        : Colors.black,
                     minimumSize: const Size(250, 50)),
                 child: const Text(
                   "AVANTI",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),

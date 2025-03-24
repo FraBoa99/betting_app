@@ -1,4 +1,3 @@
-import 'package:betting_app/core/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
@@ -21,10 +20,7 @@ class Settings extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.close),
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
-              },
+              onPressed: () {},
             )
           ],
         ),
@@ -52,12 +48,9 @@ class Settings extends StatelessWidget {
               onTap: () {
                 switch (index) {
                   case 0:
-                    Navigator.pushNamed(context, AppRoutes.settingsTheme);
                     break;
                   case 1:
-                    Navigator.pushNamed(context, AppRoutes.settingSport);
                   case 2:
-                    Navigator.pushNamed(context, AppRoutes.settingsBookmaker);
                   default:
                 }
               },

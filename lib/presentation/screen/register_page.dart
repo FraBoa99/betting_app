@@ -15,13 +15,13 @@ class RegisterPage extends StatelessWidget {
           actions: [
             TextButton(
                 onPressed: () {
-                  context.read<NavigationCubit>().navigateToHome();
+                  context.read<NavigationCubit>().navigateToGuestHome();
                 },
                 child: const Text(
-                  'Skip',
+                  'Indietro',
                   style: TextStyle(
                       fontFamily: 'Playfair Display',
-                      fontSize: 23,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 )),
@@ -40,7 +40,7 @@ class RegisterPage extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    spacing: 20.5,
+                    spacing: 22,
                     children: [
                       const Spacer(),
                       ElevatedButton(
@@ -48,12 +48,12 @@ class RegisterPage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(buttonWidth, buttonHeight),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
+                                borderRadius: BorderRadius.circular(12)),
                             backgroundColor: const Color(0xFF1877F2)),
                         child: Row(
                           children: [
                             SvgPicture.asset(
-                              Assets.imagesIconsLogoFacebookLogo,
+                              Assets.logoFacebookLogo,
                               height: 30,
                             ),
                             const Expanded(
@@ -77,11 +77,12 @@ class RegisterPage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(buttonWidth, buttonHeight),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                                borderRadius: BorderRadius.circular(12)),
+                            backgroundColor: Colors.white),
                         child: Row(
                           children: [
                             SvgPicture.asset(
-                              Assets.imagesIconsLogoGoogleLogo,
+                              Assets.logoGoogleLogo,
                               height: 30,
                             ),
                             const Expanded(
@@ -105,11 +106,12 @@ class RegisterPage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(buttonWidth, buttonHeight),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                                borderRadius: BorderRadius.circular(12)),
+                            backgroundColor: Colors.white),
                         child: Row(
                           children: [
                             SvgPicture.asset(
-                              Assets.imagesIconsLogoAppleLogo,
+                              Assets.logoAppleLogo,
                               height: 30,
                             ),
                             const Expanded(
@@ -126,10 +128,10 @@ class RegisterPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
+                      const SizedBox(),
+                      const Divider(
+                        thickness: 0.29,
                       ),
-
                       //CREA ACCOUNT BUTTON
                       ElevatedButton(
                           onPressed: () {
@@ -139,14 +141,12 @@ class RegisterPage extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(buttonWidth, buttonHeight),
-                              backgroundColor:
-                                  const Color.fromRGBO(254, 76, 68, 1)
-                                      .withAlpha(245),
+                              backgroundColor: Theme.of(context).primaryColor,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15))),
+                                  borderRadius: BorderRadius.circular(12))),
                           child: const Expanded(
                             child: Text(
-                              'CREA NUOVO ACCOUNT',
+                              'CREA UN NUOVO ACCOUNT',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: 'Playfair Display',

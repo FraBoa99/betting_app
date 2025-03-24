@@ -1,5 +1,6 @@
 import 'package:betting_app/data/models/local_user.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SummaryStep extends StatefulWidget {
   String name;
@@ -35,21 +36,22 @@ class SummaryStep extends StatefulWidget {
 class _SummaryStepState extends State<SummaryStep> {
   @override
   Widget build(BuildContext context) {
+    String birthday = DateFormat('yyyy-MM-dd').format(widget.birthday!);
     return Padding(
-      padding: const EdgeInsets.only(top: 30.0, left: 16),
+      padding: const EdgeInsets.only(top: 28.0, left: 16),
       child: Column(
         children: [
           const Text(
             'Riepilogo Account:\nControlla i Tuoi Dati 🔍',
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                fontSize: 26, fontWeight: FontWeight.w600, color: Colors.white),
             textAlign: TextAlign.start,
           ),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           _buildListItem("Nome", widget.name, widget.onEditName),
-          _buildListItem("Data di nascita", widget.birthday.toString(),
-              widget.onEditBirthday),
+          _buildListItem("Data di nascita", birthday, widget.onEditBirthday),
           _buildListItem("Email", widget.email, widget.onEditEmail),
           _buildListItem("Nickname", widget.nickname, widget.onEditNickname),
           const Spacer(),
@@ -58,7 +60,7 @@ class _SummaryStepState extends State<SummaryStep> {
             child: Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: const Color.fromARGB(255, 181, 217, 53),
                     minimumSize: const Size(250, 50)),
                 onPressed: () {
                   widget.onSubmit();
@@ -78,8 +80,14 @@ class _SummaryStepState extends State<SummaryStep> {
 
 Widget _buildListItem(String title, String value, VoidCallback onTap) {
   return ListTile(
-    title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-    subtitle: Text(value),
+    title: Text(title,
+        style: const TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 23, color: Colors.white)),
+    subtitle: Text(value,
+        style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Color.fromARGB(255, 181, 178, 178))),
     trailing: const Icon(Icons.edit),
     onTap: onTap,
   );

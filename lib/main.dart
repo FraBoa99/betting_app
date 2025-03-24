@@ -2,10 +2,13 @@ import 'package:betting_app/core/navigation/app_router.dart';
 import 'package:betting_app/core/repository/auth_repository.dart';
 import 'package:betting_app/core/repository/odds_repository.dart';
 import 'package:betting_app/core/repository/user_repository.dart';
-import 'package:betting_app/core/service_locator.dart';
+import 'package:betting_app/core/utils/service_locator.dart';
+import 'package:betting_app/logic/cubit/app_theme/theme_cubit.dart';
+import 'package:betting_app/logic/cubit/app_theme/theme_state.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_cubit.dart';
 import 'package:betting_app/logic/cubit/betting_logic/matches_and_odds_cubit.dart';
 import 'package:betting_app/logic/cubit/home/sport_cubit.dart';
+import 'package:betting_app/logic/cubit/navigation/bottom_nav_cubit.dart';
 import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
 import 'package:betting_app/logic/cubit/settings/bookmakers_cubit.dart';
 import 'package:betting_app/logic/cubit/settings/sports_settings_cubit.dart';
@@ -30,6 +33,8 @@ Future<void> main() async {
     BlocProvider(
       create: (context) => AuthCubit(getIt<AuthRepository>()),
     ),
+    BlocProvider(create: (context) => ThemeCubit()),
+    BlocProvider(create: (context) => BottomNavCubit()),
     BlocProvider(
       create: (context) => UserCubit(
           userRepository: getIt<UserRepository>(),
@@ -52,9 +57,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: createRouter(context),
-      debugShowCheckedModeBanner: false,
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, state) {
+        return MaterialApp.router(
+          theme: state.themeData,
+          routerConfig: createRouter(context),
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }

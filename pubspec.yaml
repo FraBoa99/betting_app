@@ -81,17 +81,19 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/app/
-    - assets/images/flags/
-    - assets/images/icons/
-    - assets/images/icons/logo/
+    - assets/app/
+    - assets/flags/
+    - assets/icon/
+    - assets/logo/
+    - assets/sports/
 
 flutter_assets:
   assets_path:
-    - assets/images/app/
-    - assets/images/flags/
-    - assets/images/icons/
-    - assets/images/icons/logo/
+    - assets/app/
+    - assets/flags/
+    - assets/logo/
+    - assets/icon/
+    - assets/sports/
   output_path: lib/constants/assets/
   filename: assets.dart
   field_prefix: null

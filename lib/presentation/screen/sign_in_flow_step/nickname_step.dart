@@ -50,14 +50,16 @@ class _NicknameStepState extends State<NicknameStep> {
           const Text('Scegli il tuo nickname',
               style: TextStyle(
                   fontSize: 28,
+                  color: Colors.white,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'Roboto')),
+                  fontFamily: 'Playfair Display')),
           const SizedBox(
             height: 30,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 16),
             child: TextField(
+              style: const TextStyle(color: Colors.white, fontSize: 23),
               controller: widget.nicknameController,
               maxLength: 10,
               onChanged: (text) {
@@ -73,6 +75,16 @@ class _NicknameStepState extends State<NicknameStep> {
                 }
               },
               decoration: InputDecoration(
+                  border: const UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 2),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: _isValidNickname
+                            ? const Color.fromARGB(255, 181, 217, 53)
+                            : Colors.grey.shade300,
+                        width: 2),
+                  ),
                   hintText: "",
                   errorText: _errorMessage,
                   hintFadeDuration: const Duration(milliseconds: 30)),
@@ -89,12 +101,13 @@ class _NicknameStepState extends State<NicknameStep> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        _isValidNickname ? Colors.blue : Colors.grey.shade300,
+                    backgroundColor: _isValidNickname
+                        ? const Color.fromARGB(255, 181, 217, 53)
+                        : Colors.black,
                     minimumSize: const Size(250, 50)),
                 child: const Text(
                   "AVANTI",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),

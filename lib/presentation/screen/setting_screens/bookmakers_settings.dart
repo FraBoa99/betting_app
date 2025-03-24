@@ -1,4 +1,3 @@
-import 'package:betting_app/core/app_routes.dart';
 import 'package:betting_app/logic/cubit/settings/bookmakers_cubit.dart';
 import 'package:betting_app/presentation/widget/bookmakers/bookmaker_square.dart';
 import 'package:betting_app/presentation/widget/bookmakers/nation_square.dart';
@@ -27,10 +26,7 @@ class _BookmakersSettingsState extends State<BookmakersSettings> {
         actions: [
           IconButton(
             icon: const Icon(Icons.close),
-            onPressed: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
-            },
+            onPressed: () {},
           )
         ],
       ),

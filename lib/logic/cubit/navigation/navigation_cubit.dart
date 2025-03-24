@@ -2,9 +2,11 @@ import 'package:betting_app/logic/cubit/navigation/navigation_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NavigationCubit extends Cubit<NavigationState> {
-  NavigationCubit() : super(NavigationHome());
+  NavigationCubit() : super(NavigationWrappedHome());
 
-  void navigateToHome() => emit(NavigationHome());
+  void navigateToWrappedHome() => emit(NavigationWrappedHome());
+  void navigateToUserHome() => emit(NavigationUserHome());
+  void navigateToGuestHome() => emit(NavigationGuestHome());
   void navigateToLogin() => emit(NavigationLogin());
   void navigateToSignupPage() => emit(NavigationSignupPage());
   void navigateToProfile() => emit(NavigationProfile());

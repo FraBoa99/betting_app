@@ -66,19 +66,22 @@ class _NameStepState extends State<NameStep> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Ciao!\nCome ti chiami?',
+          const Text('Ciao!!\nCome ti chiami?',
               style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Roboto')),
+                fontSize: 29,
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Playfair Display',
+              )),
           const SizedBox(
             height: 30,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 16),
             child: TextField(
+                style: const TextStyle(color: Colors.white, fontSize: 23),
                 controller: widget.nameController,
-                maxLength: 22,
+                maxLength: 30,
                 onChanged: (text) {
                   String filteredText =
                       text.replaceAll(RegExp(r'[^a-zA-Z ]'), '');
@@ -92,12 +95,22 @@ class _NameStepState extends State<NameStep> {
                   }
                 },
                 decoration: InputDecoration(
-                    hintText: "Mario Rossi",
-                    errorText: _errorMessage,
-                    hintFadeDuration: const Duration(milliseconds: 30),
-                    hintStyle: const TextStyle(
-                      fontWeight: FontWeight.w200,
-                    ))),
+                  border: const UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 2),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: _isValidName
+                            ? const Color.fromARGB(255, 181, 217, 53)
+                            : Colors.grey.shade300,
+                        width: 2),
+                  ),
+                  hintText: "Inserire nome e cognome",
+                  errorText: _errorMessage,
+                  hintFadeDuration: const Duration(milliseconds: 30),
+                  hintStyle: const TextStyle(
+                      fontWeight: FontWeight.w200, color: Colors.white),
+                )),
           ),
           const Spacer(),
           Padding(
@@ -110,12 +123,14 @@ class _NameStepState extends State<NameStep> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        _isValidName ? Colors.blue : Colors.grey.shade300,
+                    backgroundColor: _isValidName
+                        ? const Color.fromARGB(255, 181, 217, 53)
+                        : Colors.grey.shade300,
                     minimumSize: const Size(250, 50)),
-                child: const Text(
-                  "AVANTI",
-                  style: TextStyle(color: Colors.white),
+                child: Text(
+                  _isValidName ? "AVANTI" : '',
+                  style: TextStyle(
+                      color: _isValidName ? Colors.black : Colors.white),
                 ),
               ),
             ),

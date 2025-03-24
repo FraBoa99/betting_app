@@ -52,25 +52,39 @@ class _EmailStepState extends State<EmailStep> {
           const Text("Inserisci la tua Email",
               style: TextStyle(
                   fontSize: 28,
+                  color: Colors.white,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'Roboto')),
+                  fontFamily: 'Playfair Display')),
           const SizedBox(
             height: 30,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 16),
             child: TextField(
+              style: const TextStyle(color: Colors.white, fontSize: 23),
               controller: widget.emailController,
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(
                     r'[a-zA-Z0-9@.]')), //Solo lettere,numeri,@ e punto. ;)
               ],
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                  border: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.blue,
+                        width: 2), // Colore e spessore della linea sotto
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: _isValidEmail
+                            ? const Color.fromARGB(255, 181, 217, 53)
+                            : Colors.grey.shade300,
+                        width:
+                            2), // Linea sotto di colore verde quando il TextField è selezionato
+                  ),
                   hintText: "esempio@gmail.com",
-                  hintFadeDuration: Duration(milliseconds: 30),
-                  hintStyle: TextStyle(
-                    fontWeight: FontWeight.w200,
-                  )),
+                  hintFadeDuration: const Duration(milliseconds: 30),
+                  hintStyle: const TextStyle(
+                      fontWeight: FontWeight.w200, color: Colors.white)),
             ),
           ),
           const Spacer(),
@@ -84,12 +98,13 @@ class _EmailStepState extends State<EmailStep> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        _isValidEmail ? Colors.blue : Colors.grey.shade300,
+                    backgroundColor: _isValidEmail
+                        ? const Color.fromARGB(255, 181, 217, 53)
+                        : Colors.black,
                     minimumSize: const Size(250, 50)),
                 child: const Text(
                   "AVANTI",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),

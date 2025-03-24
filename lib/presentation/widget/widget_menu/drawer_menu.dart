@@ -1,4 +1,3 @@
-import 'package:betting_app/core/app_routes.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,9 +26,7 @@ class DrawerMenu extends StatelessWidget {
           _buildDrawerItem(
             icon: Icons.settings,
             text: 'Impostazioni',
-            onTap: () {
-              Navigator.of(context).pushNamed(AppRoutes.settings);
-            },
+            onTap: () {},
           ),
           _buildDrawerItem(
             icon: Icons.info,

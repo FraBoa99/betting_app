@@ -1,4 +1,6 @@
+import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Settings extends StatelessWidget {
   Settings({super.key});
@@ -20,7 +22,9 @@ class Settings extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.close),
-              onPressed: () {},
+              onPressed: () {
+                context.read<NavigationCubit>().navigateToWrappedHome();
+              },
             )
           ],
         ),

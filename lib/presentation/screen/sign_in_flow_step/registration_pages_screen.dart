@@ -25,9 +25,7 @@ enum Page {
 
 // ignore: must_be_immutable
 class RegistrationPagesScreen extends StatefulWidget {
-  LocalUser? localUser;
-
-  RegistrationPagesScreen({super.key, this.localUser});
+  const RegistrationPagesScreen({super.key});
 
   @override
   State<StatefulWidget> createState() => _RegistrationFlowState();
@@ -39,12 +37,14 @@ class _RegistrationFlowState extends State<RegistrationPagesScreen> {
   bool _isEditingProfile = false;
 
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _surnameController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nicknameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   String name = '';
+  String surname = '';
   String email = '';
   String nickname = '';
   String currency = '';
@@ -57,6 +57,7 @@ class _RegistrationFlowState extends State<RegistrationPagesScreen> {
     return LocalUser(
         uid: uuid.v4(),
         name: name,
+        surname: surname,
         email: email,
         nickname: nickname,
         dateOfBirth: birthday.toString(),
@@ -133,6 +134,14 @@ class _RegistrationFlowState extends State<RegistrationPagesScreen> {
                 _previousPage();
               },
               icon: const Icon(Icons.arrow_back)),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.close, color: Colors.white),
+              onPressed: () {
+                context.read<NavigationCubit>().navigateToSignupPage();
+              },
+            ),
+          ],
         ),
         body: Column(children: [
           Expanded(
@@ -142,10 +151,11 @@ class _RegistrationFlowState extends State<RegistrationPagesScreen> {
             children: [
               NameStep(
                   nameController: _nameController,
-                  isEditingProfile: _isEditingProfile,
-                  onNext: (value, isEditing) {
+                  surnameController: _surnameController,
+                  onNext: (name, surname) {
                     setState(() {
-                      name = value;
+                      this.name = name;
+                      this.surname = surname;
                     });
                     _nextPage();
                   }),

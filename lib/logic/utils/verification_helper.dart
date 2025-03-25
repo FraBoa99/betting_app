@@ -28,11 +28,6 @@ class VerificationHelper {
     return age > 100;
   }
 
-  bool isValidName(String name) {
-    name = name.trim();
-    return name.contains(' ') && name.split(' ').length == 2;
-  }
-
   bool isValidEmail(String email) {
     String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
     RegExp regExp = RegExp(pattern);

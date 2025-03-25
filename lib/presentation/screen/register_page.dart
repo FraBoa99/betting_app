@@ -15,7 +15,7 @@ class RegisterPage extends StatelessWidget {
           actions: [
             TextButton(
                 onPressed: () {
-                  context.read<NavigationCubit>().navigateToGuestHome();
+                  context.read<NavigationCubit>().navigateToWrappedHome();
                 },
                 child: const Text(
                   'Indietro',
@@ -51,11 +51,14 @@ class RegisterPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12)),
                             backgroundColor: const Color(0xFF1877F2)),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
                               Assets.logoFacebookLogo,
                               height: 30,
                             ),
+                            //const Spacer(),
                             const Expanded(
                               child: Text(
                                 'CONTINUA CON FACEBOOK',
@@ -70,7 +73,6 @@ class RegisterPage extends StatelessWidget {
                           ],
                         ),
                       ),
-
                       //Google button
                       ElevatedButton(
                         onPressed: () {},
@@ -80,6 +82,8 @@ class RegisterPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12)),
                             backgroundColor: Colors.white),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
                               Assets.logoGoogleLogo,
@@ -109,6 +113,8 @@ class RegisterPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12)),
                             backgroundColor: Colors.white),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
                               Assets.logoAppleLogo,
@@ -144,16 +150,14 @@ class RegisterPage extends StatelessWidget {
                               backgroundColor: Theme.of(context).primaryColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12))),
-                          child: const Expanded(
-                            child: Text(
-                              'CREA UN NUOVO ACCOUNT',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontFamily: 'Playfair Display',
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                          child: const Text(
+                            'CREA UN NUOVO ACCOUNT',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Playfair Display',
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600),
                           )),
                     ]));
           }),

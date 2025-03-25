@@ -1,57 +1,78 @@
-import 'package:betting_app/logic/utils/verification_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NameStep extends StatefulWidget {
   const NameStep(
       {super.key,
       required this.nameController,
-      required this.isEditingProfile,
+      required this.surnameController,
       required this.onNext});
 
-  final Function(String, bool) onNext;
+  final Function(String, String) onNext;
   final TextEditingController nameController;
-  final bool isEditingProfile;
+  final TextEditingController surnameController;
 
   @override
   State<StatefulWidget> createState() => _NameStepState();
 }
 
 class _NameStepState extends State<NameStep> {
-  bool _isValidName = false;
+  bool _isFormValid = false;
+  bool _isNameValid = false;
+  bool _isSurnameValid = false;
   String? _errorMessage;
 
   void _onSubmit() {
-    widget.onNext(widget.nameController.text, widget.isEditingProfile);
+    widget.onNext(widget.nameController.text, widget.surnameController.text);
   }
 
   @override
   void initState() {
-    //Eseguo doppio controllo. Prima, e in caso di modifica della textfield.
     super.initState();
 
-    _isValidName =
-        VerificationHelper.instance.isValidName(widget.nameController.text);
+    _isNameValid = (widget.nameController.text.length > 3);
+    _isSurnameValid = (widget.surnameController.text.length > 3);
+    _isFormValid = (_isNameValid && _isSurnameValid);
 
     setState(() {
-      _isValidName;
+      _isFormValid;
+      _isNameValid;
+      _isSurnameValid;
     });
 
     widget.nameController.addListener(() {
-      String newText = widget.nameController.text.replaceAll(
-          RegExp(r'\s+'), ' '); // Sostituisce più spazi con uno solo
+      String newText =
+          widget.nameController.text.replaceAll(RegExp(r'\s+'), ' ');
       if (widget.nameController.text != newText) {
         widget.nameController.value = TextEditingValue(
           text: newText,
-          selection: TextSelection.collapsed(
-              offset: newText.length), // Mantiene il cursore alla fine
+          selection: TextSelection.collapsed(offset: newText.length),
         );
       }
-      _isValidName =
-          VerificationHelper.instance.isValidName(widget.nameController.text);
+      _isNameValid = (widget.nameController.text.length > 3);
 
-      _isValidName
+      _isNameValid
           ? setState(() {
-              _isValidName;
+              _isNameValid;
+              _isFormValid = (_isNameValid && _isSurnameValid);
+            })
+          : null;
+    });
+    widget.surnameController.addListener(() {
+      String newText =
+          widget.surnameController.text.replaceAll(RegExp(r'\s+'), ' ');
+      if (widget.surnameController.text != newText) {
+        widget.surnameController.value = TextEditingValue(
+          text: newText,
+          selection: TextSelection.collapsed(offset: newText.length),
+        );
+      }
+      _isSurnameValid = (widget.surnameController.text.length > 3);
+
+      _isSurnameValid
+          ? setState(() {
+              _isSurnameValid;
+              _isFormValid = (_isNameValid && _isSurnameValid);
             })
           : null;
     });
@@ -60,77 +81,162 @@ class _NameStepState extends State<NameStep> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30.0, left: 16),
+      padding: const EdgeInsets.only(top: 25.0, left: 16, right: 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Ciao!!\nCome ti chiami?',
+          const Text('Creazione Account',
               style: TextStyle(
-                fontSize: 29,
+                fontSize: 31,
                 color: Colors.white,
                 fontWeight: FontWeight.w700,
                 fontFamily: 'Playfair Display',
               )),
           const SizedBox(
-            height: 30,
+            height: 40,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 16),
-            child: TextField(
-                style: const TextStyle(color: Colors.white, fontSize: 23),
-                controller: widget.nameController,
-                maxLength: 30,
-                onChanged: (text) {
-                  String filteredText =
-                      text.replaceAll(RegExp(r'[^a-zA-Z ]'), '');
+          const Text('Nome',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Playfair Display',
+              )),
+          const SizedBox(
+            height: 10,
+          ),
+          TextField(
+              autocorrect: false,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(30),
+              ],
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 23,
+              ),
+              controller: widget.nameController,
+              onChanged: (text) {
+                String filteredText =
+                    text.replaceAll(RegExp(r'[^a-zA-Z ]'), '');
 
-                  if (text != filteredText) {
-                    widget.nameController.value = TextEditingValue(
-                      text: filteredText,
-                      selection:
-                          TextSelection.collapsed(offset: filteredText.length),
-                    );
-                  }
-                },
-                decoration: InputDecoration(
-                  border: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
+                if (text != filteredText) {
+                  widget.nameController.value = TextEditingValue(
+                    text: filteredText,
+                    selection:
+                        TextSelection.collapsed(offset: filteredText.length),
+                  );
+                }
+              },
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                filled: true,
+                fillColor: const Color.fromARGB(206, 28, 27, 27),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide(
-                        color: _isValidName
-                            ? const Color.fromARGB(255, 181, 217, 53)
-                            : Colors.grey.shade300,
-                        width: 2),
-                  ),
-                  hintText: "Inserire nome e cognome",
-                  errorText: _errorMessage,
-                  hintFadeDuration: const Duration(milliseconds: 30),
-                  hintStyle: const TextStyle(
-                      fontWeight: FontWeight.w200, color: Colors.white),
-                )),
+                        color: _isNameValid
+                            ? const Color.fromARGB(220, 181, 217, 53)
+                            : Colors.white)),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                      color: _isNameValid
+                          ? const Color.fromARGB(220, 181, 217, 53)
+                          : const Color.fromARGB(255, 48, 45, 45),
+                      width: 2),
+                ),
+                errorText: _errorMessage,
+                hintFadeDuration: const Duration(milliseconds: 30),
+                hintStyle: const TextStyle(
+                    fontWeight: FontWeight.w200, color: Colors.white),
+              )),
+          const SizedBox(
+            height: 40,
           ),
+          const Text('Cognome',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Playfair Display',
+              )),
+          const SizedBox(
+            height: 10,
+          ),
+          TextField(
+              autocorrect: false,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(30),
+              ],
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 23,
+              ),
+              controller: widget.surnameController,
+              onChanged: (text) {
+                String filteredText =
+                    text.replaceAll(RegExp(r'[^a-zA-Z ]'), '');
+
+                if (text != filteredText) {
+                  widget.surnameController.value = TextEditingValue(
+                    text: filteredText,
+                    selection:
+                        TextSelection.collapsed(offset: filteredText.length),
+                  );
+                }
+              },
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                filled: true,
+                fillColor: const Color.fromARGB(206, 28, 27, 27),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(
+                        color: _isSurnameValid
+                            ? const Color.fromARGB(220, 181, 217, 53)
+                            : Colors.white)),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                      color: _isSurnameValid
+                          ? const Color.fromARGB(220, 181, 217, 53)
+                          : const Color.fromARGB(255, 48, 45, 45),
+                      width: 2),
+                ),
+                errorText: _errorMessage,
+                hintFadeDuration: const Duration(milliseconds: 30),
+                hintStyle: const TextStyle(
+                    fontWeight: FontWeight.w200, color: Colors.white),
+              )),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.only(bottom: 45),
             child: Center(
               child: ElevatedButton(
-                onPressed: _isValidName
+                onPressed: _isFormValid
                     ? () {
                         _onSubmit();
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: _isValidName
+                    backgroundColor: _isFormValid
                         ? const Color.fromARGB(255, 181, 217, 53)
-                        : Colors.grey.shade300,
+                        : const Color.fromARGB(255, 255, 0, 0),
                     minimumSize: const Size(250, 50)),
                 child: Text(
-                  _isValidName ? "AVANTI" : '',
+                  "AVANTI",
                   style: TextStyle(
-                      color: _isValidName ? Colors.black : Colors.white),
+                      color: _isFormValid
+                          ? Colors.black
+                          : const Color.fromARGB(255, 0, 0, 0)),
                 ),
               ),
             ),

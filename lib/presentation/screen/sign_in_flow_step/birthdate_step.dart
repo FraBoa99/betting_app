@@ -102,19 +102,19 @@ class _BirthdateStepState extends State<BirthdateStep> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 35.0, left: 16),
+      padding: const EdgeInsets.only(top: 25.0, left: 16),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text("Data di nascita",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 29,
+                  fontSize: 31,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Playfair Display')),
           const SizedBox(
-            height: 50,
+            height: 120,
           ),
           TextField(
             controller: widget.dateController,

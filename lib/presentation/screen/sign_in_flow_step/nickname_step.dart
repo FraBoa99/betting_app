@@ -75,19 +75,31 @@ class _NicknameStepState extends State<NicknameStep> {
                 }
               },
               decoration: InputDecoration(
-                  border: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
+                contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                filled: true,
+                fillColor: const Color.fromARGB(206, 28, 27, 27),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide(
                         color: _isValidNickname
-                            ? const Color.fromARGB(255, 181, 217, 53)
-                            : Colors.grey.shade300,
-                        width: 2),
-                  ),
-                  hintText: "",
-                  errorText: _errorMessage,
-                  hintFadeDuration: const Duration(milliseconds: 30)),
+                            ? const Color.fromARGB(220, 181, 217, 53)
+                            : Colors.white)),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                      color: _isValidNickname
+                          ? const Color.fromARGB(220, 181, 217, 53)
+                          : const Color.fromARGB(255, 48, 45, 45),
+                      width: 2),
+                ),
+                errorText: _errorMessage,
+                hintFadeDuration: const Duration(milliseconds: 30),
+                hintStyle: const TextStyle(
+                    fontWeight: FontWeight.w200, color: Colors.white),
+              ),
             ),
           ),
           const Spacer(),

@@ -3,6 +3,7 @@ class LocalUser {
   final String uid;
   //User's information
   final String name;
+  final String surname;
   final String email;
   final String nickname;
   final String? photoURL;
@@ -25,6 +26,7 @@ class LocalUser {
   LocalUser({
     required this.uid,
     required this.name,
+    required this.surname,
     required this.email,
     required this.nickname,
     this.photoURL,
@@ -47,6 +49,7 @@ class LocalUser {
     return LocalUser(
         uid: data['uid'],
         name: data['name'],
+        surname: data['surname'],
         email: data['email'],
         nickname: data['nickname'],
         balance: data['balance'],
@@ -75,6 +78,7 @@ class LocalUser {
   LocalUser copyWith({
     String? uid,
     String? name,
+    String? surname,
     String? email,
     String? nickname,
     String? photoURL,
@@ -95,6 +99,7 @@ class LocalUser {
     return LocalUser(
       uid: uid ?? this.uid,
       name: name ?? this.name,
+      surname: surname ?? this.surname,
       email: email ?? this.email,
       nickname: nickname ?? this.nickname,
       photoURL: photoURL ?? this.photoURL,

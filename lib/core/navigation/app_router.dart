@@ -25,7 +25,7 @@ GoRouter createRouter(BuildContext context) {
           builder: (context, state) => const RegisterPage()),
       GoRoute(
           path: '/create-account',
-          builder: (context, state) => RegistrationPagesScreen()),
+          builder: (context, state) => const RegistrationPagesScreen()),
       GoRoute(path: '/setting-page', builder: (context, state) => Settings()),
     ],
     redirect: (context, state) {

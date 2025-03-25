@@ -51,12 +51,12 @@ class _EmailStepState extends State<EmailStep> {
         children: [
           const Text("Inserisci la tua Email",
               style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 31,
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Playfair Display')),
           const SizedBox(
-            height: 30,
+            height: 40,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 16),
@@ -64,27 +64,35 @@ class _EmailStepState extends State<EmailStep> {
               style: const TextStyle(color: Colors.white, fontSize: 23),
               controller: widget.emailController,
               inputFormatters: [
+                LengthLimitingTextInputFormatter(30),
                 FilteringTextInputFormatter.allow(RegExp(
                     r'[a-zA-Z0-9@.]')), //Solo lettere,numeri,@ e punto. ;)
               ],
               decoration: InputDecoration(
-                  border: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.blue,
-                        width: 2), // Colore e spessore della linea sotto
-                  ),
-                  focusedBorder: UnderlineInputBorder(
+                contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
+                filled: true,
+                fillColor: const Color.fromARGB(206, 28, 27, 27),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide(
                         color: _isValidEmail
-                            ? const Color.fromARGB(255, 181, 217, 53)
-                            : Colors.grey.shade300,
-                        width:
-                            2), // Linea sotto di colore verde quando il TextField è selezionato
-                  ),
-                  hintText: "esempio@gmail.com",
-                  hintFadeDuration: const Duration(milliseconds: 30),
-                  hintStyle: const TextStyle(
-                      fontWeight: FontWeight.w200, color: Colors.white)),
+                            ? const Color.fromARGB(220, 181, 217, 53)
+                            : Colors.white)),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                      color: _isValidEmail
+                          ? const Color.fromARGB(220, 181, 217, 53)
+                          : const Color.fromARGB(255, 48, 45, 45),
+                      width: 2),
+                ),
+                hintFadeDuration: const Duration(milliseconds: 30),
+                hintStyle: const TextStyle(
+                    fontWeight: FontWeight.w200, color: Colors.white),
+              ),
             ),
           ),
           const Spacer(),

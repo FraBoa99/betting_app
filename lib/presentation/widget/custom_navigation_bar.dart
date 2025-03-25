@@ -1,5 +1,6 @@
 import 'package:betting_app/constants/assets/assets.dart';
 import 'package:betting_app/logic/cubit/navigation/bottom_nav_cubit.dart';
+import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -38,6 +39,19 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
               context.read<BottomNavCubit>().setIndex(index);
+
+              if (index != selectedIndex) {
+                switch (index) {
+                  case 0:
+                    context.read<NavigationCubit>().navigateToWrappedHome();
+                  case 1:
+                    context.read<NavigationCubit>().navigateToSignupPage();
+                  case 2:
+                    print('ciao');
+                  case 3:
+                    context.read<NavigationCubit>().navigateToSettings();
+                }
+              }
             },
             items: [
               BottomNavigationBarItem(

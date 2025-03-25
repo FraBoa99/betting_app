@@ -34,13 +34,13 @@ Future<void> main() async {
       create: (context) => AuthCubit(getIt<AuthRepository>()),
     ),
     BlocProvider(create: (context) => ThemeCubit()),
-    BlocProvider(create: (context) => BottomNavCubit()),
+    BlocProvider(create: (context) => getIt<BottomNavCubit>()),
     BlocProvider(
       create: (context) => UserCubit(
           userRepository: getIt<UserRepository>(),
           authCubit: getIt<AuthCubit>()),
     ),
-    BlocProvider(create: (context) => NavigationCubit()),
+    BlocProvider(create: (context) => NavigationCubit(getIt<BottomNavCubit>())),
     BlocProvider(create: (context) => BookmakersCubit()),
     BlocProvider(create: (context) => SportsSettingsCubit()),
     BlocProvider(

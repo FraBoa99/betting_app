@@ -1,8 +1,11 @@
+// 📦 Package imports:
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// 🌎 Project imports:
 import 'package:betting_app/data/constants/list_of_sports.dart';
 import 'package:betting_app/data/models/league.dart';
 import 'package:betting_app/data/models/sport.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SportsSettingsState extends Equatable {
   final Sport sport;

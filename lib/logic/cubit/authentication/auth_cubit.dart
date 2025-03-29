@@ -1,7 +1,10 @@
+// 🎯 Dart imports:
 import 'dart:core';
 
+// 🌎 Project imports:
 import 'package:betting_app/core/repository/auth_repository.dart';
 import 'package:betting_app/data/models/local_user.dart';
+// 📦 Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -21,7 +24,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> checkAuthStatus() async {
     final user = await _authRepository.getCurrentUser();
     if (user != null) {
-      //emit(AuthSuccess());
+      emit(AuthSuccess(user, ''));
     } else {
       emit(AuthUnauthenticated());
     }
@@ -35,6 +38,11 @@ class AuthCubit extends Cubit<AuthState> {
     return null;
   }
 
+  void _handleAuthError(String message) {
+    emit(AuthError(message));
+    Future.delayed(const Duration(seconds: 2), () => emit(AuthInitial()));
+  }
+
   // === EMAIL CREATE ACCOUNT ===
   Future<void> createAccountWithEmail(LocalUser user, String password) async {
     emit(AuthLoading());
@@ -42,60 +50,52 @@ class AuthCubit extends Cubit<AuthState> {
       final userCredential =
           await _authRepository.createUserWithEmail(user.email, password);
 
-      if (userCredential != null && userCredential.user != null) {
-        LocalUser newUser = user.copyWith(uid: userCredential.user!.uid);
-
-        await _authRepository.saveUserToFirestore(newUser);
-
-        emit(AuthSuccess(userCredential.user!, 'email'));
-      } else {
-        emit(AuthError(
-            'Errore nella fase di regstrazione. Controllare la rete internet e riprovare.'));
-
-        Future.delayed(const Duration(seconds: 2), () {
-          emit(AuthInitial());
-        });
+      if (userCredential.user == null) {
+        _handleAuthError(
+            'Errore nella registrazione. Controllare la rete e riprovare.');
+        return;
       }
-    } catch (e) {
-      emit(AuthError(e.toString()));
 
-      Future.delayed(const Duration(seconds: 2), () {
-        emit(AuthInitial());
-      });
+      LocalUser newUser = user.copyWith(uid: userCredential.user!.uid);
+      await _authRepository.saveUserToFirestore(newUser);
+
+      emit(AuthSuccess(userCredential.user!, 'email'));
+    } catch (e) {
+      _handleAuthError(e.toString());
     }
   }
 
-  // === PHONE SIGN IN (SEND CODE)===
-  Future<void> sendCode(String phoneNumber) async {
-    emit(AuthLoading());
-    try {
-      _verificationId = await _authRepository.verifyPhoneNumber(phoneNumber);
-      //emit(AuthSuccess());
-    } catch (e) {
-      emit(AuthError(e.toString()));
-    }
-  }
+  // // === PHONE SIGN IN (SEND CODE)===
+  // Future<void> sendCode(String phoneNumber) async {
+  //   emit(AuthLoading());
+  //   try {
+  //     _verificationId = await _authRepository.verifyPhoneNumber(phoneNumber);
+  //     //emit(AuthSuccess());
+  //   } catch (e) {
+  //     emit(AuthError(e.toString()));
+  //   }
+  // }
 
-  // === PHONE SIGN IN (OTP SIGN IN)===  'sendCode()' è la funzione che invoca questo metodo.
-  Future<void> signInWithOTP(String otp) async {
-    try {
-      final user = await _authRepository.signInWithOTP(_verificationId, otp);
-      if (user != null) {
-        emit(AuthSuccess(user, 'phone_number'));
-      } else {
-        emit(AuthError(
-            'Errore durante il processo di login. Controllare la rete internet e riprovare.'));
-        Future.delayed(const Duration(seconds: 2), () {
-          emit(AuthInitial());
-        });
-      }
-    } catch (e) {
-      emit(AuthError(e.toString()));
-      Future.delayed(const Duration(seconds: 2), () {
-        emit(AuthInitial());
-      });
-    }
-  }
+  // // === PHONE SIGN IN (OTP SIGN IN)===  'sendCode()' è la funzione che invoca questo metodo.
+  // Future<void> signInWithOTP(String otp) async {
+  //   try {
+  //     final user = await _authRepository.signInWithOTP(_verificationId, otp);
+  //     if (user != null) {
+  //       emit(AuthSuccess(user, 'phone_number'));
+  //     } else {
+  //       emit(AuthError(
+  //           'Errore durante il processo di login. Controllare la rete internet e riprovare.'));
+  //       Future.delayed(const Duration(seconds: 2), () {
+  //         emit(AuthInitial());
+  //       });
+  //     }
+  //   } catch (e) {
+  //     emit(AuthError(e.toString()));
+  //     Future.delayed(const Duration(seconds: 2), () {
+  //       emit(AuthInitial());
+  //     });
+  //   }
+  // }
 
   // === EMAIL SIGN IN ===
   Future<void> signInWithEmail(String email, String password) async {
@@ -131,24 +131,23 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthError(e.toString()));
     }
   }*/
-// === FACEBOOK ===
-  Future<void> signinWithFacebook() async {
-    try {
-      emit(AuthLoading());
-      final fbUser = await _authRepository.signinWithFacebook();
-      //emit(AuthSuccess());
-    } catch (e) {
-      emit(AuthError(e.toString()));
-    }
-  }
+// // === FACEBOOK ===
+//   Future<void> signinWithFacebook() async {
+//     try {
+//       emit(AuthLoading());
+//       final fbUser = await _authRepository.signinWithFacebook();
+//       //emit(AuthSuccess());
+//     } catch (e) {
+//       emit(AuthError(e.toString()));
+//     }
+//   }
 
-  Future<void> signOutAccount() async {
+  Future<void> signOut() async {
     emit(AuthLoading());
     try {
       await _authRepository.signOut();
       emit(AuthInitial());
-    } catch (e) {
-      emit(AuthError(e.toString()));
+    } catch (_) {
       emit(AuthInitial());
     }
   }

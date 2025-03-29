@@ -1,7 +1,10 @@
-import 'package:betting_app/data/constants/list_of_bookmakers.dart';
-import 'package:betting_app/data/models/bookmaker.dart';
+// 📦 Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// 🌎 Project imports:
+import 'package:betting_app/data/constants/list_of_bookmakers.dart';
+import 'package:betting_app/data/models/bookmaker.dart';
 
 enum CountryOptions { eu, us, au }
 

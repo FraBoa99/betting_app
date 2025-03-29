@@ -1,6 +1,10 @@
+// 🎯 Dart imports:
 import 'dart:async';
+import 'dart:io';
 
+// 🌎 Project imports:
 import 'package:betting_app/data/models/local_user.dart';
+// 📦 Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -24,6 +28,17 @@ class AuthRepository {
     return _firebaseAuth.currentUser;
   }
 
+  Future<void> signOut() async {}
+
+  Future<Map<String, dynamic>?> getUserData(String uid) async {
+    DocumentSnapshot doc = await _firestore.collection('users').doc(uid).get();
+
+    if (doc.exists) {
+      return doc.data() as Map<String, dynamic>;
+    }
+    return null;
+  }
+
   Future<void> saveUserToFirestore(LocalUser user) async {
     try {
       final userMap =
@@ -35,39 +50,39 @@ class AuthRepository {
     }
   }
 
-  // === PHONE SIGN IN ===
-  Future<String> verifyPhoneNumber(String phoneNumber) async {
-    Completer<String> completer = Completer();
-    try {
-      await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        timeout: const Duration(seconds: 60),
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          //Auto-resolve:
-          await _firebaseAuth.signInWithCredential(credential);
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          if (!completer.isCompleted) {
-            completer.completeError(e.message ?? "Verification failed");
-          }
-        },
-        codeSent: (String verificationId, int? resendToken) {
-          if (!completer.isCompleted) {
-            completer.complete(verificationId);
-          }
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          if (!completer.isCompleted) {
-            completer.complete(verificationId);
-          }
-        },
-      );
-      return completer.future;
-    } catch (e) {
-      print('Errore: $e');
-      rethrow;
-    }
-  }
+  // // === PHONE SIGN IN ===
+  // Future<String> verifyPhoneNumber(String phoneNumber) async {
+  //   Completer<String> completer = Completer();
+  //   try {
+  //     await _firebaseAuth.verifyPhoneNumber(
+  //       phoneNumber: phoneNumber,
+  //       timeout: const Duration(seconds: 60),
+  //       verificationCompleted: (PhoneAuthCredential credential) async {
+  //         //Auto-resolve:
+  //         await _firebaseAuth.signInWithCredential(credential);
+  //       },
+  //       verificationFailed: (FirebaseAuthException e) {
+  //         if (!completer.isCompleted) {
+  //           completer.completeError(e.message ?? "Verification failed");
+  //         }
+  //       },
+  //       codeSent: (String verificationId, int? resendToken) {
+  //         if (!completer.isCompleted) {
+  //           completer.complete(verificationId);
+  //         }
+  //       },
+  //       codeAutoRetrievalTimeout: (String verificationId) {
+  //         if (!completer.isCompleted) {
+  //           completer.complete(verificationId);
+  //         }
+  //       },
+  //     );
+  //     return completer.future;
+  //   } catch (e) {
+  //     print('Errore: $e');
+  //     rethrow;
+  //   }
+  // }
 
   Future<User?> signInWithOTP(String verificationId, String otp) async {
     try {
@@ -95,72 +110,92 @@ class AuthRepository {
     }
   }
 
-  // === EMAIL SIGN UP ====
-  Future<UserCredential?> createUserWithEmail(
+  // === EMAIL CREATE USER ====
+  Future<UserCredential> createUserWithEmail(
       String email, String password) async {
     try {
       return await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        rethrow;
-      } else if (e.code == 'email-already-in-use') {
-        rethrow;
+      throw _handleAuthError(e);
+    }
+  }
+
+  Exception _handleAuthError(Exception e) {
+    if (e is FirebaseAuthException) {
+      switch (e.code) {
+        case 'invalid-email':
+          return Exception('L\'email inserita non è valida.');
+        case 'weak-password':
+          return Exception('La password è troppo debole.');
+        case 'email-already-in-use':
+          return Exception('L\'email è già registrata. Prova a fare il login.');
+        case 'user-not-found':
+          return Exception('Utente non trovato. Controlla le credenziali.');
+        case 'wrong-password':
+          return Exception('Password errata. Riprova.');
+        case 'network-request-failed':
+          return Exception('Errore di connessione. Controlla la tua rete.');
+        default:
+          return Exception('Errore di autenticazione: ${e.message}');
       }
-    } catch (e) {
-      rethrow;
+    } else if (e is TimeoutException) {
+      return Exception(
+          'La richiesta è scaduta. Controlla la tua connessione e riprova.');
+    } else if (e is FormatException) {
+      return Exception('Errore di formato nei dati ricevuti.');
+    } else if (e is SocketException) {
+      return Exception('Nessuna connessione Internet. Verifica la rete.');
+    } else {
+      return Exception('Si è verificato un errore imprevisto: ${e.toString()}');
     }
-    return null;
-  }
-
-  // === GOOGLE SIGNIN ===
-  Future<User?> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser!.authentication;
-      final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      final userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
-      return userCredential.user;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  // === FACEBOOK SIGNIN ===
-  Future<UserCredential?> signinWithFacebook() async {
-    try {
-      final LoginResult result = await _facebookAuth.login();
-      if (result.status == LoginStatus.success) {
-        final AccessToken? fbtoken = result.accessToken;
-        if (fbtoken != null) {
-          final OAuthCredential credential =
-              FacebookAuthProvider.credential(fbtoken.tokenString);
-
-          return await FirebaseAuth.instance.signInWithCredential(credential);
-        }
-      } else {
-        throw Exception("Login failed with status: ${result.status}");
-      }
-    } catch (e) {
-      rethrow;
-    }
-    return null;
-  }
-
-  Future<void> resetPassword(String email) async {
-    try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
-    } catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
-
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-    await _googleSignIn.signOut();
   }
 }
+
+  // // === GOOGLE SIGNIN ===
+  // Future<User?> signInWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+  //     final GoogleSignInAuthentication googleAuth =
+  //         await googleUser!.authentication;
+  //     final credential = GoogleAuthProvider.credential(
+  //         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+  //     final userCredential =
+  //         await _firebaseAuth.signInWithCredential(credential);
+  //     return userCredential.user;
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
+
+  // // === FACEBOOK SIGNIN ===
+  // Future<UserCredential?> signinWithFacebook() async {
+  //   try {
+  //     final LoginResult result = await _facebookAuth.login();
+  //     if (result.status == LoginStatus.success) {
+  //       final AccessToken? fbtoken = result.accessToken;
+  //       if (fbtoken != null) {
+  //         final OAuthCredential credential =
+  //             FacebookAuthProvider.credential(fbtoken.tokenString);
+
+  //         return await FirebaseAuth.instance.signInWithCredential(credential);
+  //       }
+  //     } else {
+  //       throw Exception("Login failed with status: ${result.status}");
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  //   return null;
+  // }
+
+  // Future<void> resetPassword(String email) async {
+  //   try {
+  //     await _firebaseAuth.sendPasswordResetEmail(email: email);
+  //   } catch (e) {
+  //     print(e);
+  //     rethrow;
+  //   }
+  // }
+
+

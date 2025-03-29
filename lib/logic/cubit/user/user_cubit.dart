@@ -1,10 +1,13 @@
+// 🎯 Dart imports:
 import 'dart:async';
 
+// 🌎 Project imports:
 import 'package:betting_app/core/repository/user_repository.dart';
 import 'package:betting_app/data/models/local_user.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_cubit.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_state.dart';
 import 'package:betting_app/logic/cubit/user/user_state.dart';
+// 📦 Package imports:
 import 'package:bloc/bloc.dart';
 
 class UserCubit extends Cubit<UserState> {
@@ -19,8 +22,7 @@ class UserCubit extends Cubit<UserState> {
       _handleAuthState(authState);
     });
 
-    scheduleMicrotask(() =>
-        _handleAuthState(authCubit.state)); //MicroTask aggiunto alla Queue.
+    scheduleMicrotask(() => _handleAuthState(authCubit.state));
   }
 
   @override
@@ -79,15 +81,10 @@ class UserCubit extends Cubit<UserState> {
       if (user != null) {
         emit(UserLoaded(user));
       } else {
-        emit(const UserNotFound(true));
+        emit(const UserNotFound(false));
       }
     } catch (e) {
       emit(UserError(e.toString()));
-      rethrow;
     }
-  }
-
-  Future<bool> _isUserRegistered(String uid) async {
-    return await userRepository.isUserRegistered(uid);
   }
 }

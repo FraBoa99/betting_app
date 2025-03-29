@@ -1,6 +1,9 @@
+// 📦 Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// 🌎 Project imports:
 import 'package:betting_app/core/repository/odds_repository.dart';
 import 'package:betting_app/data/models/odds.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class MatchesAndOddsState {}
 

@@ -1,0 +1,8 @@
+groups:
+  - flutter
+  - dart
+  - package
+  - relative
+
+separate_groups: true
+sort_by: alphabetical

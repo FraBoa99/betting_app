@@ -1,3 +1,5 @@
+// 📦 Package imports:
+// 🌎 Project imports:
 import 'package:betting_app/data/models/local_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,20 +11,21 @@ class UserRepository {
   Future<LocalUser?> getUser() async {
     try {
       User? firebaseUser = _auth.currentUser;
-      if (firebaseUser == null) {
-        throw Exception("You are not authenticated, please login.");
-      }
+      if (firebaseUser == null) return null;
+      print(firebaseUser);
 
       DocumentSnapshot userDoc =
           await _firestore.collection("users").doc(firebaseUser.uid).get();
-      if (userDoc.exists) {
-        var userData = userDoc.data() as Map<String, dynamic>;
-        return LocalUser.fromDatabase(userData);
-      }
+
+      if (!userDoc.exists || userDoc.data() == null) return null;
+
+      var userData = userDoc.data() as Map<String, dynamic>;
+      print("Dati utente da Firestore: $userData");
+      return LocalUser.fromDatabase(userData);
     } catch (e) {
-      rethrow;
+      print("Errore nel recupero utente: $e");
+      return null;
     }
-    throw Exception("Error, User not found, please retry login");
   }
 
   Future<void> deleteUser(String uid) async {

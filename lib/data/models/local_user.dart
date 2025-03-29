@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class LocalUser {
   //User ID
   final String uid;
@@ -47,17 +49,17 @@ class LocalUser {
 
   factory LocalUser.fromDatabase(Map<String, dynamic> data) {
     return LocalUser(
-        uid: data['uid'],
-        name: data['name'],
-        surname: data['surname'],
-        email: data['email'],
-        nickname: data['nickname'],
-        balance: data['balance'],
-        betsCount: data['betsCount'],
-        winningBets: data['winningBets'],
-        losingBets: data['losingBets'],
-        provider: data['provider'],
-        isFirstLogin: data['isFirstLogin']);
+        uid: data['uid'] ?? const Uuid().v4(),
+        name: data['name'] ?? '',
+        surname: data['surname'] ?? '',
+        email: data['email'] ?? '',
+        nickname: data['nickname'] ?? '',
+        balance: data['balance'] ?? 0.0,
+        betsCount: data['betsCount'] ?? 0,
+        winningBets: data['winningBets'] ?? 0,
+        losingBets: data['losingBets'] ?? 0,
+        provider: data['provider'] ?? '',
+        isFirstLogin: data['isFirstLogin'] ?? false);
   }
 
   Map<String, dynamic> toMap() {

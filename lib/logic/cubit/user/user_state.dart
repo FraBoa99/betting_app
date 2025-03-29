@@ -1,5 +1,8 @@
-import 'package:betting_app/data/models/local_user.dart';
+// 📦 Package imports:
 import 'package:equatable/equatable.dart';
+
+// 🌎 Project imports:
+import 'package:betting_app/data/models/local_user.dart';
 
 abstract class UserState extends Equatable {
   const UserState();

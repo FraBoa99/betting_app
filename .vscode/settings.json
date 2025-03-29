@@ -35,7 +35,9 @@
         "**/firepit-log.txt": true,
         "*.txt": true,
         "firepit-log.txt": true,
-        "**/*.txt": true
+        "**/*.txt": true,
+        "**/.firebaserc": true,
+        ".firebaserc": true
     },
     "explorerExclude.backup": {}
 }

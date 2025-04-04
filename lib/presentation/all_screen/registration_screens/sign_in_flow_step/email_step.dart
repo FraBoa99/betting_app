@@ -1,6 +1,6 @@
 // 🐦 Flutter imports:
 // 🌎 Project imports:
-import 'package:betting_app/core/theme/app_colors.dart';
+import 'package:betting_app/core/config/theme/app_colors.dart';
 import 'package:betting_app/logic/utils/regex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

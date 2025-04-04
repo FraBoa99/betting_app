@@ -118,6 +118,42 @@ class Assets {
   /// assets/sports/boxe_icon.svg
   static const String sportsBoxeIcon = "assets/sports/boxe_icon.svg";
 
+  /// Assets for sportsLeagueSoccerBundesligaLogo
+  /// assets/sports/league_soccer/bundesliga_logo.svg
+  static const String sportsLeagueSoccerBundesligaLogo = "assets/sports/league_soccer/bundesliga_logo.svg";
+
+  /// Assets for sportsLeagueSoccerEredivisieLogo
+  /// assets/sports/league_soccer/eredivisie_logo.svg
+  static const String sportsLeagueSoccerEredivisieLogo = "assets/sports/league_soccer/eredivisie_logo.svg";
+
+  /// Assets for sportsLeagueSoccerLaligaLogo
+  /// assets/sports/league_soccer/laliga_logo.svg
+  static const String sportsLeagueSoccerLaligaLogo = "assets/sports/league_soccer/laliga_logo.svg";
+
+  /// Assets for sportsLeagueSoccerLigue1Logo
+  /// assets/sports/league_soccer/ligue1_logo.svg
+  static const String sportsLeagueSoccerLigue1Logo = "assets/sports/league_soccer/ligue1_logo.svg";
+
+  /// Assets for sportsLeagueSoccerMlsLogo
+  /// assets/sports/league_soccer/mls_logo.svg
+  static const String sportsLeagueSoccerMlsLogo = "assets/sports/league_soccer/mls_logo.svg";
+
+  /// Assets for sportsLeagueSoccerPremierleagueLogo
+  /// assets/sports/league_soccer/premierleague_logo.svg
+  static const String sportsLeagueSoccerPremierleagueLogo = "assets/sports/league_soccer/premierleague_logo.svg";
+
+  /// Assets for sportsLeagueSoccerSerieaLogo
+  /// assets/sports/league_soccer/seriea_logo.svg
+  static const String sportsLeagueSoccerSerieaLogo = "assets/sports/league_soccer/seriea_logo.svg";
+
+  /// Assets for sportsLeagueSoccerUclLogo
+  /// assets/sports/league_soccer/ucl_logo.svg
+  static const String sportsLeagueSoccerUclLogo = "assets/sports/league_soccer/ucl_logo.svg";
+
+  /// Assets for sportsLeagueSoccerUelLogo
+  /// assets/sports/league_soccer/uel.logo.svg
+  static const String sportsLeagueSoccerUelLogo = "assets/sports/league_soccer/uel.logo.svg";
+
   /// Assets for sportsSoccerIcon
   /// assets/sports/soccer_icon.svg
   static const String sportsSoccerIcon = "assets/sports/soccer_icon.svg";

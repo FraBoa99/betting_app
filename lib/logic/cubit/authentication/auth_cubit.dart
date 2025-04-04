@@ -13,8 +13,6 @@ import 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
 
-  late String _verificationId;
-
   AuthCubit(this._authRepository) : super(AuthInitial());
 
   void emitCurrentState() {
@@ -40,6 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void _handleAuthError(String message) {
     emit(AuthError(message));
+    print(message);
     Future.delayed(const Duration(seconds: 2), () => emit(AuthInitial()));
   }
 

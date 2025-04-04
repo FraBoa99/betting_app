@@ -14,8 +14,6 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBar extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-    );
+    return AppBar(backgroundColor: Colors.transparent);
   }
 }

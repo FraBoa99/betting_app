@@ -1,9 +1,8 @@
 // 📦 Package imports:
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 // 🌎 Project imports:
-import 'package:betting_app/core/theme/app_theme.dart';
+import 'package:betting_app/core/config/theme/app_theme.dart';
 import 'package:betting_app/logic/cubit/app_theme/theme_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit()

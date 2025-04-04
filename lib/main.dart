@@ -1,5 +1,6 @@
 // 🐦 Flutter imports:
 // 🌎 Project imports:
+import 'package:betting_app/core/config/screen_size_config.dart';
 import 'package:betting_app/core/navigation/app_router.dart';
 import 'package:betting_app/core/repository/odds_repository.dart';
 import 'package:betting_app/core/repository/user_repository.dart';
@@ -59,6 +60,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSizeConfig.init(context);
+
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         return MaterialApp.router(

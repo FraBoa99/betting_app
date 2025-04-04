@@ -1,43 +1,50 @@
 // 🐦 Flutter imports:
+import 'package:betting_app/core/config/theme/app_colors.dart';
+import 'package:betting_app/logic/cubit/home/sport_cubit.dart';
+import 'package:betting_app/logic/utils/size_utils.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 // 📦 Package imports:
 import 'package:flutter_svg/svg.dart';
 
-class LeagueSquare extends StatelessWidget {
-  final String leagueName;
+class LeagueWidget extends StatefulWidget {
+  final String leagueKey;
   final String leagueFlag;
 
-  const LeagueSquare({
+  const LeagueWidget({
     super.key,
-    required this.leagueName,
+    required this.leagueKey,
     required this.leagueFlag,
   });
 
   @override
+  State<StatefulWidget> createState() => _LeagueWidgetState();
+}
+
+class _LeagueWidgetState extends State<LeagueWidget> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 90,
-      height: 80,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.white),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            leagueFlag,
-            width: 23,
-            height: 23,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Text(leagueName,
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center),
-        ],
-      ),
-    );
+    return BlocBuilder<SportCubit, SportState>(builder: (context, state) {
+      return Container(
+        width: dynamicScale(context, 85, null),
+        height: dynamicScale(context, null, 85),
+        decoration: BoxDecoration(
+            color: state.selectedLeague.key == widget.leagueKey
+                ? AppColors.bgCircleLegaSelected
+                : AppColors.bgCircleLega,
+            shape: BoxShape.circle),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              widget.leagueFlag,
+              width: dynamicScale(context, 65, null),
+              height: dynamicScale(context, null, 65),
+            )
+          ],
+        ),
+      );
+    });
   }
 }

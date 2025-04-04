@@ -8,7 +8,7 @@ class ApiService {
   static const endpoint = '/v4';
 
   //ApiKey
-  static const String apikey = '0e682c28e71abc4b729bc57d61d570bd';
+  static const String apikey = '03fd41c6e5111594672857d1318cbdc4';
 
   Future<dynamic> getOdds(String sportKey, String regions, String? markets,
       String? eventId, String? bookmakers) async {

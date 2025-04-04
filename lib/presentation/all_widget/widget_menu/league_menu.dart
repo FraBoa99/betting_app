@@ -20,17 +20,15 @@ class LeagueMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
+                spacing: 15,
                 children: state.leagueList.map((league) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 9),
-                    child: GestureDetector(
-                      onTap: () {
-                        context.read<SportCubit>().selectedLeague(league);
-                      },
-                      child: LeagueSquare(
-                        leagueName: league.title,
-                        leagueFlag: league.image,
-                      ),
+                  return GestureDetector(
+                    onTap: () {
+                      context.read<SportCubit>().selectedLeague(league);
+                    },
+                    child: LeagueWidget(
+                      leagueKey: league.key,
+                      leagueFlag: league.image,
                     ),
                   );
                 }).toList(),

@@ -4,7 +4,7 @@
 import 'package:betting_app/core/navigation/navigation_notifier.dart';
 import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
 import 'package:betting_app/logic/cubit/navigation/navigation_state.dart';
-import 'package:betting_app/presentation/all_screen/home_screens/home_wrapper.dart';
+import 'package:betting_app/presentation/all_screen/home_screens/home_screen.dart';
 import 'package:betting_app/presentation/all_screen/registration_screens/guest_profile_page.dart';
 import 'package:betting_app/presentation/all_screen/registration_screens/registration_pages_screen.dart';
 import 'package:betting_app/presentation/all_screen/setting_screens/settings.dart';
@@ -21,7 +21,7 @@ GoRouter createRouter(BuildContext context) {
     refreshListenable: NavigationNotifier(navigationCubit),
     initialLocation: '/',
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const HomeWrapper()),
+      GoRoute(path: '/', builder: (context, state) => HomeScreen()),
       GoRoute(
           path: '/signup-page',
           builder: (context, state) => const GuestProfilePage()),

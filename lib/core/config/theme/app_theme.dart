@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // 🌎 Project imports:
-import '../utils/app_text_styles.dart';
+import '../../utils/app_text_styles.dart';
 
 class AppThemes {
   static final Map<String, Color> themeColors = {

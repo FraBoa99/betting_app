@@ -32,50 +32,50 @@ class LeagueSoccer {
   static final serieA = League(
       key: 'soccer_italy_serie_a',
       title: 'Serie A',
-      image: Assets.flagsItalyFlag,
+      image: Assets.sportsLeagueSoccerSerieaLogo,
       region: 'eu',
       bookmakers: bookmakersEu);
   static final laLiga = League(
       key: 'soccer_spain_la_liga',
       title: 'La Liga',
-      image: Assets.flagsSpainFlag,
+      image: Assets.sportsLeagueSoccerLaligaLogo,
       region: 'eu',
       bookmakers: bookmakersEu);
   static final ligue1 = League(
       key: 'soccer_france_ligue_one',
       title: 'Ligue 1',
-      image: Assets.flagsGermanyFlag,
+      image: Assets.sportsLeagueSoccerLigue1Logo,
       region: 'eu',
       bookmakers: bookmakersEu);
   static final bundesliga = League(
       key: 'soccer_germany_bundesliga',
       title: 'Bundesliga',
-      image: Assets.flagsGermanyFlag,
+      image: Assets.sportsLeagueSoccerBundesligaLogo,
       region: 'eu',
       bookmakers: bookmakersEu);
   static final eredivise = League(
       key: 'soccer_netherlands_eredivisie',
       title: 'Eredivise',
-      image: Assets.flagsNetherlandsFlag,
+      image: Assets.sportsLeagueSoccerEredivisieLogo,
       region: 'eu',
       bookmakers: bookmakersEu);
   static final championsLeague = League(
       key: 'soccer_uefa_champs_league',
       title: 'UEFA Champions',
-      image: Assets.flagsEuropeFlag,
+      image: Assets.sportsLeagueSoccerUclLogo,
       region: 'eu',
       bookmakers: bookmakersEu);
   static final europaLeague = League(
       key: 'soccer_uefa_europa_league',
       title: 'UEFA Europe',
-      image: Assets.flagsEuropeFlag,
+      image: Assets.sportsLeagueSoccerUelLogo,
       region: 'eu',
       bookmakers: bookmakersEu);
   static final mls = League(
       key: 'soccer_usa_mls',
       title: 'MLS',
       region: 'us',
-      image: Assets.flagsUsaFlag,
+      image: Assets.sportsLeagueSoccerMlsLogo,
       bookmakers: bookmakersUs);
 }
 

@@ -1,4 +1,5 @@
 // 🐦 Flutter imports:
+import 'package:betting_app/logic/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 
 class SportSquare extends StatelessWidget {
@@ -12,8 +13,8 @@ class SportSquare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 80,
-      height: 75,
+      width: dynamicScale(context, 60, null),
+      height: dynamicScale(context, null, 60),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: Colors.white),
       child: Column(

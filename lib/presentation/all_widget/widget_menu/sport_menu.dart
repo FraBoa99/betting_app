@@ -27,7 +27,7 @@ class SportMenu extends StatelessWidget {
         return Row(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 9),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: GestureDetector(
                   onTap: () {
                     context.read<SportCubit>().selectedSport(sport);

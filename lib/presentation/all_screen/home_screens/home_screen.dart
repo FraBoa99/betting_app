@@ -24,12 +24,7 @@ class HomeScreen extends StatelessWidget {
           body: const Stack(children: [
             SafeArea(
                 bottom: false,
-                child: Padding(
-                    padding: EdgeInsets.only(
-                      top: 10.0,
-                      left: 1,
-                    ),
-                    child: UserState is UserLoaded ? HomeView() : GuestView())),
+                child: UserState is UserLoaded ? HomeView() : GuestView()),
             Positioned(
               bottom: 0,
               left: 0,

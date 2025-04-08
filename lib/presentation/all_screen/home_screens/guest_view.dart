@@ -31,7 +31,9 @@ class _GuestViewState extends State<GuestView> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // SportMenu(),
         const Spacer(),
         BlocBuilder<BettingCubit, MatchesAndOddsState>(
           builder: (context, state) {

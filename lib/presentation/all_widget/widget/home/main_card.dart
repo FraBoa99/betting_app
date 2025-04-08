@@ -1,4 +1,5 @@
 import 'package:betting_app/data/models/odds.dart';
+import 'package:betting_app/logic/utils/size_utils.dart';
 import 'package:betting_app/presentation/all_widget/widget_menu/league_menu.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,6 @@ class _MainCardState extends State<MainCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.54,
       width: double.infinity,
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -33,21 +33,41 @@ class _MainCardState extends State<MainCard> {
         ],
       ),
       child: Column(
-        spacing: 25,
+        spacing: 17,
         children: [
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'Calcio',
-              style: TextStyle(
-                  fontFamily: "Playfair Display",
-                  fontWeight: FontWeight.w700,
-                  fontSize: 23),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 175.0),
+            child: Divider(
+              thickness: 4,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Calcio',
+                style: TextStyle(
+                    fontFamily: "Playfair Display",
+                    fontWeight: FontWeight.w700,
+                    fontSize: 24),
+              ),
             ),
           ),
           const LeagueMenu(), // Menu delle leghe
           if (widget.oddsList.isNotEmpty)
-            Expanded(child: _buildMatchCard(widget.oddsList.first)),
+            SizedBox(
+              height: dynamicScale(context, null, 190),
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.oddsList.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                itemBuilder: (context, index) {
+                  final odd = widget.oddsList[index];
+                  return _buildMatchCard(odd);
+                },
+              ),
+            ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.10,
           )
@@ -64,34 +84,56 @@ class _MainCardState extends State<MainCard> {
     final awayOdd = market?.outcomes.firstWhere((o) => o.name == odd.awayTeam);
     final drawOdd = market?.outcomes.firstWhere((o) => o.name == 'Draw');
 
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      elevation: 1,
-      child: Padding(
-        padding:
-            const EdgeInsets.only(left: 12, right: 12, top: 15, bottom: 30),
+    return SizedBox(
+      width: dynamicScale(context, 400, null),
+      height: dynamicScale(context, null, 250),
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        elevation: 1,
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(odd.homeTeam,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                const Text("VS",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-                Text(odd.awayTeam,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-              ],
-            ),
+            Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Row(
+                  spacing: 20,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          odd.homeTeam,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    const Text(
+                      "-",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          odd.awayTeam,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
             const Spacer(),
 
             // Quote della partita
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildOddButton(homeOdd?.price ?? 0),
                   _buildOddButton(drawOdd?.price ?? 0, isDraw: true),
@@ -109,11 +151,11 @@ class _MainCardState extends State<MainCard> {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-        backgroundColor: isDraw ? Colors.orange : Colors.blue,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: const Color(0xFFF6F8FA),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
-      child: Text(odd.toStringAsFixed(2),
-          style: const TextStyle(color: Colors.white)),
+      child: Text(' ${odd.toStringAsFixed(2)}',
+          style: const TextStyle(color: Colors.black)),
     );
   }
 }

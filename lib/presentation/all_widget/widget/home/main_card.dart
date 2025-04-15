@@ -1,6 +1,7 @@
 import 'package:betting_app/data/models/odds.dart';
-import 'package:betting_app/logic/utils/size_utils.dart';
+import 'package:betting_app/logic/utils/format_data.dart';
 import 'package:betting_app/presentation/all_widget/widget_menu/league_menu.dart';
+import 'package:betting_app/presentation/all_widget/widget_menu/sport_menu.dart';
 import 'package:flutter/material.dart';
 
 class MainCard extends StatefulWidget {
@@ -13,8 +14,6 @@ class MainCard extends StatefulWidget {
 }
 
 class _MainCardState extends State<MainCard> {
-  bool isExpanded = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,33 +34,14 @@ class _MainCardState extends State<MainCard> {
       child: Column(
         spacing: 17,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 175.0),
-            child: Divider(
-              thickness: 4,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Calcio',
-                style: TextStyle(
-                    fontFamily: "Playfair Display",
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24),
-              ),
-            ),
-          ),
+          SportMenu(), //Menu degli sport
           const LeagueMenu(), // Menu delle leghe
           if (widget.oddsList.isNotEmpty)
-            SizedBox(
-              height: dynamicScale(context, null, 190),
+            Flexible(
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: widget.oddsList.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                separatorBuilder: (_, __) => const SizedBox(),
                 itemBuilder: (context, index) {
                   final odd = widget.oddsList[index];
                   return _buildMatchCard(odd);
@@ -79,66 +59,76 @@ class _MainCardState extends State<MainCard> {
   Widget _buildMatchCard(Odds odd) {
     final bookmaker = odd.bookmakers.isNotEmpty ? odd.bookmakers.first : null;
     final market =
-        bookmaker?.market.isNotEmpty == true ? bookmaker!.market.first : null;
+        bookmaker?.market.isNotEmpty == true ? bookmaker?.market.first : null;
     final homeOdd = market?.outcomes.firstWhere((o) => o.name == odd.homeTeam);
     final awayOdd = market?.outcomes.firstWhere((o) => o.name == odd.awayTeam);
     final drawOdd = market?.outcomes.firstWhere((o) => o.name == 'Draw');
 
-    return SizedBox(
-      width: dynamicScale(context, 400, null),
-      height: dynamicScale(context, null, 250),
+    return AspectRatio(
+      aspectRatio: 3 / 2,
       child: Card(
         color: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         elevation: 1,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-                padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
                 child: Row(
-                  spacing: 20,
+                  spacing: 40,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          odd.homeTeam,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        odd.homeTeam,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                     ),
-                    const SizedBox(width: 12),
                     const Text(
                       "-",
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          odd.awayTeam,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        odd.awayTeam,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                     ),
                   ],
-                )),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Text(
+                formatDateTime(odd.commenceTime),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              ),
+            ),
             const Spacer(),
-
             // Quote della partita
             Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildOddButton(homeOdd?.price ?? 0),
-                  _buildOddButton(drawOdd?.price ?? 0, isDraw: true),
-                  _buildOddButton(awayOdd?.price ?? 0),
-                ],
+              padding: const EdgeInsets.only(bottom: 10.0, left: 8, right: 8),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  spacing: 9,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildOddButton(homeOdd?.price ?? 0),
+                    _buildOddButton(drawOdd?.price ?? 0, isDraw: true),
+                    _buildOddButton(awayOdd?.price ?? 0),
+                  ],
+                ),
               ),
             ),
           ],

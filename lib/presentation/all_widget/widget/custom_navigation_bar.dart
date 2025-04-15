@@ -3,6 +3,7 @@
 import 'package:betting_app/core/config/theme/app_colors.dart';
 import 'package:betting_app/logic/cubit/navigation/bottom_nav_cubit.dart';
 import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
+import 'package:betting_app/logic/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 // 📦 Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +24,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(90)),
           child: Container(
-            width: 90,
-            height: 85,
+            width: dynamicScale(context, 90, null),
+            height: dynamicScale(context, null, 85),
             color: AppColors.bgMainContainer,
             child: Row(
               spacing: 15,
@@ -63,8 +64,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         });
       },
       child: Container(
-        height: 70,
-        width: 70,
+        height: dynamicScale(context, 70, null),
+        width: dynamicScale(context, null, 70),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,

@@ -2,6 +2,7 @@
 // 🌎 Project imports:
 import 'package:betting_app/core/config/screen_size_config.dart';
 import 'package:betting_app/core/navigation/app_router.dart';
+import 'package:betting_app/core/repository/news_repository.dart';
 import 'package:betting_app/core/repository/odds_repository.dart';
 import 'package:betting_app/core/repository/user_repository.dart';
 import 'package:betting_app/core/utils/service_locator.dart';
@@ -9,6 +10,7 @@ import 'package:betting_app/logic/cubit/app_theme/theme_cubit.dart';
 import 'package:betting_app/logic/cubit/app_theme/theme_state.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_cubit.dart';
 import 'package:betting_app/logic/cubit/betting_logic/matches_and_odds_cubit.dart';
+import 'package:betting_app/logic/cubit/home/news_cubit.dart';
 import 'package:betting_app/logic/cubit/home/sport_cubit.dart';
 import 'package:betting_app/logic/cubit/navigation/bottom_nav_cubit.dart';
 import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
@@ -52,6 +54,8 @@ Future<void> main() async {
       create: (context) => SportCubit(context.read<BettingCubit>(),
           repository: getIt<OddsRepository>()),
     ),
+    BlocProvider(
+        create: (context) => NewsCubit(newsRepository: getIt<NewsRepository>()))
   ], child: const MyApp()));
 }
 

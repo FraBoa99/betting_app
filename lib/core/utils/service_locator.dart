@@ -2,6 +2,7 @@
 // 🌎 Project imports:
 import 'package:betting_app/core/network/api_service.dart';
 import 'package:betting_app/core/repository/auth_repository.dart';
+import 'package:betting_app/core/repository/news_repository.dart';
 import 'package:betting_app/core/repository/odds_repository.dart';
 import 'package:betting_app/core/repository/user_repository.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_cubit.dart';
@@ -19,6 +20,8 @@ void setupLocator() {
   getIt.registerLazySingleton<UserRepository>(() => UserRepository());
   getIt.registerLazySingleton<OddsRepository>(
       () => OddsRepository(apiClient: getIt<ApiService>()));
+  getIt.registerLazySingleton<NewsRepository>(
+      () => NewsRepository(apiClient: getIt<ApiService>()));
   getIt.registerLazySingleton<AuthCubit>(
       () => AuthCubit(getIt<AuthRepository>()));
 

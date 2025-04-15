@@ -22,9 +22,12 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: AppColors.bgHome,
           appBar: const CustomAppBar(),
           body: const Stack(children: [
-            SafeArea(
-                bottom: false,
-                child: UserState is UserLoaded ? HomeView() : GuestView()),
+            Padding(
+              padding: EdgeInsets.only(top: 15.0),
+              child: SafeArea(
+                  bottom: false,
+                  child: UserState is UserLoaded ? HomeView() : GuestView()),
+            ),
             Positioned(
               bottom: 0,
               left: 0,

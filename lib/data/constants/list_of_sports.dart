@@ -5,7 +5,7 @@ import 'package:betting_app/data/models/sport.dart';
 
 class SportList {
   static final soccer =
-      Sport(key: '', title: 'Calcio', icon: '', leagues: soccerLeague);
+      Sport(key: '', title: 'Soccer', icon: '', leagues: soccerLeague);
   static final basket =
       Sport(key: '', title: 'Basket', icon: '', leagues: basketLeague);
   static final tennis =

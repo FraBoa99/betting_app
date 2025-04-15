@@ -21,7 +21,7 @@ class OddsRepository {
       final finalData = (data as List<dynamic>).map((item) {
         return Odds.fromMap(item);
       }).toList();
-      return finalData;
+      return finalData.take(10).toList();
     } catch (e) {
       throw Exception(e);
     }

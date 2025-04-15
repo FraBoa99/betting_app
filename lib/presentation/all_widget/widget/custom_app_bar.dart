@@ -22,7 +22,6 @@ class _CustomAppBar extends State<CustomAppBar> {
       leading: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Container(
-          constraints: const BoxConstraints(minHeight: 677),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(23),
             color: Colors.white,

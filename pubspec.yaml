@@ -58,6 +58,7 @@ dependencies:
   go_router: ^14.8.1
   import_sorter: ^4.6.0
   flutter_screenutil: ^5.9.3
+  auto_size_text: ^3.0.0
 
 
 dev_dependencies:

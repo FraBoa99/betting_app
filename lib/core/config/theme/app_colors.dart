@@ -10,10 +10,10 @@ class AppColors {
   static Color bgCircleIcon = const Color(0xFFE0FF11);
 
   //HOME PAGE:
-  static Color bgHome = const Color(0xFFEFF1F5);
+  static Color bgHome = const Color.fromARGB(255, 234, 235, 237);
 
   //MAIN CARD (CONTAINER):
-  static Color bgMainContainer = const Color.fromARGB(15, 0, 0, 0);
+  static Color bgMainContainer = const Color.fromARGB(58, 0, 0, 0);
   //Widget lega circolare
   static Color bgCircleLega = const Color.fromARGB(15, 0, 0, 0);
   static Color bgCircleLegaSelected = const Color.fromARGB(255, 109, 114, 76);

@@ -1,13 +1,13 @@
 // 🐦 Flutter imports:
+// 🌎 Project imports:
+import 'package:betting_app/constants/assets/assets.dart';
+import 'package:betting_app/core/config/theme/app_colors.dart';
+import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 // 📦 Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-// 🌎 Project imports:
-import 'package:betting_app/constants/assets/assets.dart';
-import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
 
 class GuestProfilePage extends StatelessWidget {
   const GuestProfilePage({super.key});
@@ -15,6 +15,7 @@ class GuestProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: AppColors.bgHome,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           actions: [
@@ -23,16 +24,15 @@ class GuestProfilePage extends StatelessWidget {
                   context.read<NavigationCubit>().navigateToWrappedHome();
                 },
                 child: const Text(
-                  'Indietro',
+                  'Back',
                   style: TextStyle(
                       fontFamily: 'Playfair Display',
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white),
+                      color: Colors.black),
                 )),
           ],
         ),
-        backgroundColor: Colors.black45,
         body: Center(
           child: LayoutBuilder(builder: (context, constraints) {
             double buttonWidth =
@@ -66,7 +66,7 @@ class GuestProfilePage extends StatelessWidget {
                             //const Spacer(),
                             const Expanded(
                               child: Text(
-                                'ACCEDI CON FACEBOOK',
+                                'CONTINUE WITH FACEBOOK',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontFamily: 'Playfair Display',
@@ -96,7 +96,7 @@ class GuestProfilePage extends StatelessWidget {
                             ),
                             const Expanded(
                               child: Text(
-                                'ACCEDI CON GOOGLE',
+                                'CONTINUE WITH GOOGLE',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontFamily: 'Playfair Display',
@@ -127,7 +127,7 @@ class GuestProfilePage extends StatelessWidget {
                             ),
                             const Expanded(
                               child: Text(
-                                'ACCEDI CON APPLE',
+                                'CONTINUE WITH APPLE',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontFamily: 'Playfair Display',
@@ -141,7 +141,7 @@ class GuestProfilePage extends StatelessWidget {
                       ),
                       const SizedBox(),
                       const Divider(
-                        thickness: 0.29,
+                        thickness: 1.3,
                       ),
                       //CREA ACCOUNT BUTTON
                       ElevatedButton(
@@ -152,11 +152,11 @@ class GuestProfilePage extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(buttonWidth, buttonHeight),
-                              backgroundColor: Theme.of(context).primaryColor,
+                              backgroundColor: AppColors.bgCircleIcon,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12))),
                           child: const Text(
-                            'CREA UN NUOVO ACCOUNT',
+                            'CREATE ACCOUNT',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontFamily: 'Playfair Display',
@@ -164,6 +164,30 @@ class GuestProfilePage extends StatelessWidget {
                                 fontSize: 17,
                                 fontWeight: FontWeight.w600),
                           )),
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: const TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500),
+                          children: [
+                            const TextSpan(
+                                text: "Already registered?",
+                                style: TextStyle(color: Colors.black)),
+                            TextSpan(
+                              text: " Login",
+                              style: const TextStyle(color: Colors.blueAccent),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  context
+                                      .read<NavigationCubit>()
+                                      .navigateToLogin();
+                                },
+                            ),
+                          ],
+                        ),
+                      )
                     ]));
           }),
         ));

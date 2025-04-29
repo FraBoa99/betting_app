@@ -33,16 +33,15 @@ class _LeagueWidgetState extends State<LeagueWidget> {
                 ? AppColors.bgCircleLegaSelected
                 : AppColors.bgCircleLega,
             shape: BoxShape.circle),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SvgPicture.asset(
               widget.leagueFlag,
-              width: dynamicScale(context, 65, null),
-              height: dynamicScale(context, null, 65),
-            )
-          ],
+              fit: BoxFit.contain,
+            ),
+          ),
         ),
       );
     });

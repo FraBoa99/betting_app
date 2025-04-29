@@ -3,6 +3,8 @@
 import 'package:betting_app/core/config/theme/app_colors.dart';
 import 'package:betting_app/logic/cubit/navigation/bottom_nav_cubit.dart';
 import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
+import 'package:betting_app/logic/cubit/user/user_cubit.dart';
+import 'package:betting_app/logic/cubit/user/user_state.dart';
 import 'package:betting_app/logic/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 // 📦 Package imports:
@@ -26,7 +28,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
           child: Container(
             width: dynamicScale(context, 90, null),
             height: dynamicScale(context, null, 85),
-            color: AppColors.bgMainContainer,
+            color: AppColors.bgNavigationBar,
             child: Row(
               spacing: 15,
               mainAxisSize: MainAxisSize.min,
@@ -50,18 +52,18 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     bool isSelected = index == selectedIndex;
     return GestureDetector(
       onTap: () {
-        setState(() {
-          switch (index) {
-            case 0:
-              context.read<NavigationCubit>().navigateToWrappedHome();
-            case 1:
-              context.read<NavigationCubit>().navigateToWrappedHome();
-            case 2:
-              context.read<NavigationCubit>().navigateToWrappedHome();
-            case 3:
-              context.read<NavigationCubit>().navigateToProfile();
-          }
-        });
+        switch (index) {
+          case 0:
+            context.read<NavigationCubit>().navigateToWrappedHome();
+          case 1:
+            context.read<NavigationCubit>().navigateToWrappedHome();
+          case 2:
+            context.read<NavigationCubit>().navigateToWrappedHome();
+          case 3:
+            context.read<UserCubit>().state is UserLoaded
+                ? context.read<NavigationCubit>().navigateToProfile()
+                : context.read<NavigationCubit>().navigateToSignupPage();
+        }
       },
       child: Container(
         height: dynamicScale(context, 70, null),

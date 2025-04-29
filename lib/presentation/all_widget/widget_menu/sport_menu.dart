@@ -25,7 +25,7 @@ class SportMenu extends StatelessWidget {
       fit: BoxFit.scaleDown,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 25,
+        spacing: 28,
         children: sportList.map((sport) {
           return GestureDetector(
               onTap: () {
@@ -34,9 +34,9 @@ class SportMenu extends StatelessWidget {
               child: Text(
                 sport.title,
                 style: sport == selectedSport
-                    ? const TextStyle(fontSize: 21, fontWeight: FontWeight.w700)
+                    ? const TextStyle(fontSize: 23, fontWeight: FontWeight.w700)
                     : const TextStyle(
-                        fontSize: 21, fontWeight: FontWeight.w300),
+                        fontSize: 23, fontWeight: FontWeight.w300),
               ));
         }).toList(),
       ),

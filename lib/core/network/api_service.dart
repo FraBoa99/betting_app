@@ -5,7 +5,7 @@ class ApiService {
   //API SPORT
   static const _hostSport = 'https://api.the-odds-api.com';
   static const _endpointSport = '/v4';
-  static const _apikeySport = '6e325119bf19259c9223872a1757abdc';
+  static const _apikeySport = 'bcb51cff670dc16318b2db9656a3f4e8';
 
   //API NEWS
   static const _hostNews = 'https://newsapi.org';

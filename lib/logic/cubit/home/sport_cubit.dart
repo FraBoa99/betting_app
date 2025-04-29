@@ -44,6 +44,7 @@ class SportCubit extends Cubit<SportState> {
   void selectedSport(Sport sport) {
     emit(state.copyWith(
         selectedSport: sport, leagueList: sport.leagues, selectedLeague: null));
+    selectedLeague(sport.leagues.first);
   }
 
   void selectedLeague(League league) {

@@ -7,7 +7,8 @@
    width="1122.52"
    height="793.70001"
    viewBox="0 0 1122.52 793.70001"
-   sodipodi:docname="eredivisie-2017-seeklogo.ai"
+   sodipodi:docname="eredivisie_logo.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -30,14 +31,24 @@
      inkscape:showpageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1" />
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.9209921"
+     inkscape:cx="462.00179"
+     inkscape:cy="344.73694"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g8" />
   <g
      id="g8"
      inkscape:groupmode="layer"
      inkscape:label="eredivisie-2017-seeklogo"
      transform="matrix(1.3333333,0,0,-1.3333333,0,793.7)">
     <g
-       id="g10">
+       id="g10"
+       transform="matrix(1.5523967,0,0,1.8344932,-233.74991,-252.04132)">
       <g
          id="g12"
          clip-path="url(#clipPath16)">

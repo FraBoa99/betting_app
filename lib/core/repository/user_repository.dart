@@ -12,12 +12,11 @@ class UserRepository {
     try {
       User? firebaseUser = _auth.currentUser;
       if (firebaseUser == null) return null;
-      print(firebaseUser);
 
       DocumentSnapshot userDoc =
           await _firestore.collection("users").doc(firebaseUser.uid).get();
 
-      if (!userDoc.exists || userDoc.data() == null) return null;
+      if (!userDoc.exists) return null;
 
       var userData = userDoc.data() as Map<String, dynamic>;
       print("Dati utente da Firestore: $userData");

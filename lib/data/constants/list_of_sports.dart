@@ -7,11 +7,11 @@ class SportList {
   static final soccer =
       Sport(key: '', title: 'Soccer', icon: '', leagues: soccerLeague);
   static final basket =
-      Sport(key: '', title: 'Basket', icon: '', leagues: basketLeague);
+      Sport(key: '', title: 'Basketball', icon: '', leagues: basketLeague);
   static final tennis =
       Sport(key: '', title: 'Tennis', icon: '', leagues: tennisLeague);
   static final football =
-      Sport(key: '', title: 'Football', icon: '', leagues: footballLeague);
+      Sport(key: '', title: 'Nba', icon: '', leagues: footballLeague);
 
   static final List<League> soccerLeague = [
     LeagueSoccer.serieA,

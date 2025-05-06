@@ -16,12 +16,20 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBar extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      leadingWidth: dynamicScale(context, 120, null),
-      leading: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Container(
+    return Padding(
+      padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        leadingWidth: dynamicScale(context, 120, null),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.person,
+                size: 35,
+              ))
+        ],
+        leading: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(23),
             color: Colors.white,
@@ -49,7 +57,7 @@ class _CustomAppBar extends State<CustomAppBar> {
                   ),
                   child: const Icon(
                     Icons.add,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 255, 255, 255),
                     size: 20,
                   ),
                 ),

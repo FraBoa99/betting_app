@@ -20,7 +20,7 @@ class LeagueMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
-                spacing: 15,
+                spacing: 18,
                 children: state.leagueList.map((league) {
                   return GestureDetector(
                     onTap: () {

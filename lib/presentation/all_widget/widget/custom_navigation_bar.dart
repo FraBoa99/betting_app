@@ -3,8 +3,6 @@
 import 'package:betting_app/core/config/theme/app_colors.dart';
 import 'package:betting_app/logic/cubit/navigation/bottom_nav_cubit.dart';
 import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
-import 'package:betting_app/logic/cubit/user/user_cubit.dart';
-import 'package:betting_app/logic/cubit/user/user_state.dart';
 import 'package:betting_app/logic/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 // 📦 Package imports:
@@ -39,7 +37,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 _buildIcon(Icons.home, 1, selectedIndex),
                 _buildIcon(
                     Icons.confirmation_number_outlined, 2, selectedIndex),
-                _buildIcon(Icons.person_2_outlined, 3, selectedIndex),
               ],
             ),
           ),
@@ -59,10 +56,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             context.read<NavigationCubit>().navigateToWrappedHome();
           case 2:
             context.read<NavigationCubit>().navigateToWrappedHome();
-          case 3:
-            context.read<UserCubit>().state is UserLoaded
-                ? context.read<NavigationCubit>().navigateToProfile()
-                : context.read<NavigationCubit>().navigateToSignupPage();
         }
       },
       child: Container(

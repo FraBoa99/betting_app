@@ -66,7 +66,7 @@ class UserCubit extends Cubit<UserState> {
         emit(const UserError(
             'Errore nel caricamento dei dati. Chiudere e riaprire l app'));
         Future.delayed(const Duration(seconds: 2), () {
-          const UserInitial();
+          emit(const UserInitial());
         });
       }
     } else {
@@ -77,7 +77,21 @@ class UserCubit extends Cubit<UserState> {
   Future<void> _loadUser() async {
     emit(const UserLoading());
     try {
-      final user = await userRepository.getUser();
+      String? uid;
+
+      switch (authCubit.state) {
+        case AuthSuccess(:final user):
+          uid = user.uid;
+        default:
+          uid = null;
+      }
+
+      if (uid == null) {
+        emit(const UserNotFound(false));
+        return;
+      }
+
+      final user = await userRepository.getUserById(uid);
       if (user != null) {
         emit(UserLoaded(user));
       } else {

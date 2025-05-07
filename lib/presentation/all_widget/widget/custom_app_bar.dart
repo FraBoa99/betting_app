@@ -1,7 +1,9 @@
 // 🐦 Flutter imports:
 import 'package:betting_app/core/config/theme/app_colors.dart';
+import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
 import 'package:betting_app/logic/utils/size_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -23,7 +25,11 @@ class _CustomAppBar extends State<CustomAppBar> {
         leadingWidth: dynamicScale(context, 120, null),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context
+                    .read<NavigationCubit>()
+                    .navigateToProfileIfAuthenticated();
+              },
               icon: const Icon(
                 Icons.person,
                 size: 35,

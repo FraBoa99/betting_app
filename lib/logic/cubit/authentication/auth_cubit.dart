@@ -13,7 +13,9 @@ import 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
 
-  AuthCubit(this._authRepository) : super(AuthInitial());
+  AuthCubit(this._authRepository) : super(AuthInitial()) {
+    checkAuthStatus();
+  }
 
   void emitCurrentState() {
     emit(state);
@@ -22,7 +24,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> checkAuthStatus() async {
     final user = await _authRepository.getCurrentUser();
     if (user != null) {
-      emit(AuthSuccess(user, ''));
+      emit(AuthSuccess(user, 'firebase'));
     } else {
       emit(AuthUnauthenticated());
     }

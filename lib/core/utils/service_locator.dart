@@ -27,6 +27,8 @@ void setupLocator() {
 
   getIt.registerFactory<UserCubit>(() => UserCubit(
       userRepository: getIt<UserRepository>(), authCubit: getIt<AuthCubit>()));
-  getIt.registerFactory<NavigationCubit>(
-      () => NavigationCubit(getIt<BottomNavCubit>()));
+  getIt.registerFactory<NavigationCubit>(() => NavigationCubit(
+      bottomNavCubit: getIt<BottomNavCubit>(),
+      authCubit: getIt<AuthCubit>(),
+      userCubit: getIt<UserCubit>()));
 }

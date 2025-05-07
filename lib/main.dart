@@ -4,7 +4,6 @@ import 'package:betting_app/core/config/screen_size_config.dart';
 import 'package:betting_app/core/navigation/app_router.dart';
 import 'package:betting_app/core/repository/news_repository.dart';
 import 'package:betting_app/core/repository/odds_repository.dart';
-import 'package:betting_app/core/repository/user_repository.dart';
 import 'package:betting_app/core/utils/service_locator.dart';
 import 'package:betting_app/logic/cubit/app_theme/theme_cubit.dart';
 import 'package:betting_app/logic/cubit/app_theme/theme_state.dart';
@@ -36,16 +35,14 @@ Future<void> main() async {
   setupLocator();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
-      create: (context) => UserCubit(
-          userRepository: getIt<UserRepository>(),
-          authCubit: getIt<AuthCubit>()),
+      create: (context) => getIt<UserCubit>(),
     ),
     BlocProvider(
       create: (context) => getIt<AuthCubit>(),
     ),
-    BlocProvider(create: (context) => ThemeCubit()),
+    BlocProvider(create: (context) => getIt<NavigationCubit>()),
     BlocProvider(create: (context) => getIt<BottomNavCubit>()),
-    BlocProvider(create: (context) => NavigationCubit(getIt<BottomNavCubit>())),
+    BlocProvider(create: (context) => ThemeCubit()),
     BlocProvider(create: (context) => BookmakersCubit()),
     BlocProvider(create: (context) => SportsSettingsCubit()),
     BlocProvider(

@@ -28,7 +28,9 @@ class AuthRepository {
     return _firebaseAuth.currentUser;
   }
 
-  Future<void> signOut() async {}
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 
   Future<Map<String, dynamic>?> getUserData(String uid) async {
     DocumentSnapshot doc = await _firestore.collection('users').doc(uid).get();

@@ -1,7 +1,7 @@
 // 📦 Package imports:
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class AuthState {}
+sealed class AuthState {}
 
 class AuthInitial extends AuthState {}
 

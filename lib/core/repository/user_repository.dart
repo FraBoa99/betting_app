@@ -8,19 +8,13 @@ class UserRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<LocalUser?> getUser() async {
+  Future<LocalUser?> getUserById(String uid) async {
     try {
-      User? firebaseUser = _auth.currentUser;
-      if (firebaseUser == null) return null;
-
-      DocumentSnapshot userDoc =
-          await _firestore.collection("users").doc(firebaseUser.uid).get();
+      final userDoc = await _firestore.collection("users").doc(uid).get();
 
       if (!userDoc.exists) return null;
 
-      var userData = userDoc.data() as Map<String, dynamic>;
-      print("Dati utente da Firestore: $userData");
-      return LocalUser.fromDatabase(userData);
+      return LocalUser.fromDatabase(userDoc.data()!);
     } catch (e) {
       print("Errore nel recupero utente: $e");
       return null;

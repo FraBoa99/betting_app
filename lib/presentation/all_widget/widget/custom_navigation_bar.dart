@@ -7,6 +7,7 @@ import 'package:betting_app/logic/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 // 📦 Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   const CustomNavigationBar({super.key});
@@ -33,10 +34,9 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildIcon(Icons.home_outlined, 0, selectedIndex),
-                _buildIcon(Icons.home, 1, selectedIndex),
-                _buildIcon(
-                    Icons.confirmation_number_outlined, 2, selectedIndex),
+                _buildIcon(Icons.home, 0, selectedIndex),
+                _buildIcon(Icons.confirmation_number, 1, selectedIndex),
+                _buildIcon(FontAwesomeIcons.barcode, 2, selectedIndex),
               ],
             ),
           ),
@@ -61,17 +61,14 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       child: Container(
         height: dynamicScale(context, 70, null),
         width: dynamicScale(context, null, 70),
-        alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: isSelected ? AppColors.bgCircleIcon : Colors.transparent,
         ),
-        child: Center(
-          child: Icon(
-            icon,
-            color: const Color.fromARGB(255, 94, 94, 96),
-            size: 37,
-          ),
+        child: Icon(
+          icon,
+          color: const Color.fromARGB(218, 63, 63, 65),
+          size: 40,
         ),
       ),
     );

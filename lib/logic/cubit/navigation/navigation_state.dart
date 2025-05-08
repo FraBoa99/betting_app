@@ -26,6 +26,8 @@ class NavigationSettingPage extends NavigationState {}
 
 class NavigationProfile extends NavigationState {}
 
+class NavigationUserBets extends NavigationState {}
+
 class NavigationLoading extends NavigationState {}
 
 class NavigationAuthenticated extends NavigationState {}

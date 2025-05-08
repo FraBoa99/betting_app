@@ -1,38 +1,36 @@
 // 🐦 Flutter imports:
+// 🌎 Project imports:
+import 'package:betting_app/logic/cubit/authentication/auth_cubit.dart';
+import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
 import 'package:flutter/material.dart';
-
 // 📦 Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-// 🌎 Project imports:
-import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
 
 class Settings extends StatelessWidget {
   Settings({super.key});
 
-  List<String> options = ['Theme', 'Sport', 'Bookmakers'];
+  List<String> options = ['Sport', 'Bookmakers', 'Account', 'Logout'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 38, 43, 46),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 38, 43, 46),
-          iconTheme: const IconThemeData(color: Colors.white),
-          title: const Text(
-            'Settings',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-          ),
-          centerTitle: false,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.close),
+            backgroundColor: const Color.fromARGB(255, 38, 43, 46),
+            iconTheme: const IconThemeData(color: Colors.white),
+            title: const Text(
+              'Settings',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                context.read<NavigationCubit>().navigateToWrappedHome();
+                context
+                    .read<NavigationCubit>()
+                    .navigateToProfileIfAuthenticated();
               },
-            )
-          ],
-        ),
+            )),
         body: ListView.separated(
           separatorBuilder: (context, index) {
             return const Divider(
@@ -60,7 +58,8 @@ class Settings extends StatelessWidget {
                     break;
                   case 1:
                   case 2:
-                  default:
+                  case 3:
+                    context.read<AuthCubit>().signOut();
                 }
               },
             );

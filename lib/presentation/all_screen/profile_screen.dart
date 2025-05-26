@@ -29,26 +29,29 @@ class _ProfileState extends State<Profile> {
               appBar: AppBar(
                 backgroundColor: const Color.fromARGB(255, 38, 43, 46),
                 leading: IconButton(
-                    onPressed: () {
-                      context.read<NavigationCubit>().navigateToWrappedHome();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    )),
+                  onPressed: () {
+                    context.read<NavigationCubit>().navigateToWrappedHome();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                ),
                 title: const Text(
                   'Profile',
                   style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
+                    fontSize: 23,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
                 ),
                 actions: [
                   IconButton(
-                      onPressed: () {
-                        context.read<NavigationCubit>().navigateToSettings();
-                      },
-                      icon: const Icon(Icons.settings, color: Colors.white))
+                    onPressed: () {
+                      context.read<NavigationCubit>().navigateToSettings();
+                    },
+                    icon: const Icon(Icons.settings, color: Colors.white),
+                  )
                 ],
               ),
               body: SafeArea(
@@ -56,80 +59,80 @@ class _ProfileState extends State<Profile> {
                   padding:
                       const EdgeInsets.only(left: 12.0, right: 12.0, top: 15),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Ciao ${user?.name ?? 'Default name'}!',
-                          style: const TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white),
+                      Text(
+                        'Hi ${user?.name ?? 'Default name'}!',
+                        style: const TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
                         ),
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5),
                       const Divider(
-                        color: Color.fromARGB(
-                            255, 106, 105, 105), // Colore del separatore
-                        thickness: 0.55, // Spessore del separatore
-                        indent: 5, // Distanza dal bordo sinistro
-                        endIndent: 15, // Distanza dal bordo destro
+                        color: Color.fromARGB(255, 106, 105, 105),
+                        thickness: 0.55,
+                        indent: 5,
+                        endIndent: 15,
                       ),
-                      const SizedBox(
-                        height: 22,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            'Balance',
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '${user?.balance ?? '0,00 €'} €',
-                            style: const TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            'Total bets placed',
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '${user?.betsCount ?? '0'}',
-                            style: const TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white),
-                          )
-                        ],
-                      ),
+                      const SizedBox(height: 22),
+                      StatItem(
+                          label: 'Balance',
+                          value: '${user?.balance ?? '0,00'} €'),
+                      StatItem(
+                          label: 'Total bets placed',
+                          value: '${user?.betsCount ?? '0'}'),
+                      StatItem(
+                          label: 'Won bets',
+                          value: '${user?.winningBets ?? '0'}'),
                     ],
                   ),
                 ),
               ),
             );
           }
-          // Se l'utente è ancora in stato di loading o altro, non fare niente
           return const Center(child: CircularProgressIndicator());
         },
+      ),
+    );
+  }
+}
+
+class StatItem extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const StatItem({
+    required this.label,
+    required this.value,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
+          ),
+          const Spacer(),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }

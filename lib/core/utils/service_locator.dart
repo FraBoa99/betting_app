@@ -27,7 +27,7 @@ void setupLocator() {
 
   getIt.registerFactory<UserCubit>(() => UserCubit(
       userRepository: getIt<UserRepository>(), authCubit: getIt<AuthCubit>()));
-  getIt.registerFactory<NavigationCubit>(() => NavigationCubit(
+  getIt.registerLazySingleton<NavigationCubit>(() => NavigationCubit(
       bottomNavCubit: getIt<BottomNavCubit>(),
       authCubit: getIt<AuthCubit>(),
       userCubit: getIt<UserCubit>()));

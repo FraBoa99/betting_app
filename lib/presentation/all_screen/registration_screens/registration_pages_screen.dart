@@ -1,5 +1,6 @@
 // 🐦 Flutter imports:
 // 🌎 Project imports:
+import 'package:betting_app/core/config/theme/app_colors.dart';
 import 'package:betting_app/data/models/local_user.dart';
 import 'package:betting_app/logic/cubit/authentication/auth_cubit.dart';
 import 'package:betting_app/logic/cubit/navigation/navigation_cubit.dart';
@@ -100,8 +101,7 @@ class _RegistrationFlowState extends State<RegistrationPagesScreen> {
 
   void _nextPage() {
     if (_isEditingProfile) {
-      _jumpToPage(6,
-          _isEditingProfile); //Se l'utente stava modificando i dati, torniamo al summary
+      _jumpToPage(6, _isEditingProfile);
     } else if (_currentPage < 6) {
       setState(() {
         _currentPage++;
@@ -113,8 +113,7 @@ class _RegistrationFlowState extends State<RegistrationPagesScreen> {
 
   void _previousPage() {
     if (_isEditingProfile && _currentPage != Page.summaryPage.value) {
-      _jumpToPage(6,
-          _isEditingProfile); //Se l'utente stava modificando i dati, torniamo al summary
+      _jumpToPage(6, _isEditingProfile);
     } else if (_currentPage > 0) {
       setState(() {
         _currentPage--;
@@ -137,7 +136,7 @@ class _RegistrationFlowState extends State<RegistrationPagesScreen> {
         }
       },
       child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: AppColors.bgMainContainer,
           appBar: AppBar(
             backgroundColor: Colors.black,
             leading: IconButton(
